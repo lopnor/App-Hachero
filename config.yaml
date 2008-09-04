@@ -1,0 +1,21 @@
+global:
+  work_path: t/work
+
+plugins:
+
+  - module: Input::Stdin
+
+  - module: Parse::Common
+    config:
+        format: :extended
+
+  - module: Parse::Normalize
+    config: 
+        time_zone: Asia/Tokyo
+
+  - module: Analyze::AccessCount
+
+  - module: Output::DBIC
+    config:
+        connect_info:
+            - dbi:mysql:test
