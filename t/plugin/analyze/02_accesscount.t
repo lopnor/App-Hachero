@@ -62,8 +62,6 @@ useragent: '"LWP/Simple"'
 === test2
 --- input
 authuser: -
-bytes: 15712
-date: '[06/Aug/2008:23:00:00 +0800]'
 bytes: 5567
 date: '[06/Aug/2008:14:05:45 +0800]'
 referer: '""'

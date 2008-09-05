@@ -2,7 +2,7 @@ package App::Hachero::Plugin::Input::File;
 use strict;
 use warnings;
 use base qw(App::Hachero::Plugin::Base);
-use DirHandle;
+use File::Find::Rule;
 
 sub init {
     my ($self, $context) = @_;
@@ -10,20 +10,21 @@ sub init {
 
 sub _fetch {
     my ($self, $context) = @_;
-    $self->{dh} ||= $self->_get_dirhandle($context);
+    $self->{rule} ||= $self->_get_rule($context);
     my $file;
     while (1) {
-        $file = $self->{dh}->read or return;
+        $file = $self->{rule}->match or return;
         $file !~ /^\.{1,2}/ and last;
     }
-    open my $fh, '<', File::Spec->catfile($context->work_path,$file) or die;
+    open my $fh, '<', $file or die;
     $self->{fh} = $fh;
 }
 
-sub _get_dirhandle {
+sub _get_rule {
     my ($self, $context) = @_;
     my $work_path = $context->work_path;
-    $self->{dh} = DirHandle->new($work_path);
+    $self->{rule} = File::Find::Rule->file()->start( $work_path );
+    return $self->{rule};
 }
 
 sub input : Hook {

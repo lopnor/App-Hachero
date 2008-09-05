@@ -1,7 +1,6 @@
 use strict;
 use Test::More tests => 2;
-use IO::All;
-use File::Spec;
+use File::Temp;
 use App::Hachero;
 
 BEGIN { 
@@ -9,8 +8,11 @@ BEGIN {
 }
 
 {
-    my $log = File::Spec->catfile( qw( t sample sample.log ) );
-    my $line < io $log;
+    my $line = 'hogehoge';
+    my ($fh, $log) = File::Temp::tempfile;
+    print $fh $line;
+    close $fh;
+
     my $config = {
         plugins => [
             { module => 'Input::Stdin' },

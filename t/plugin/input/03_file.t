@@ -22,8 +22,8 @@ ok $app;
 $app->initialize;
 
 my @expected = qw(
-    def
     abc
+    def
 );
 for (@expected) {
     $_ > io(File::Spec->catfile($app->work_path,$_));
