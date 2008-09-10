@@ -63,8 +63,6 @@ sub initialize {
 sub setup_plugins {
     my ($self, @args) = @_;
 
-    my $class_component_plugins = $self->class_component_plugins;
-
     $self->packages_from_plugin_path([]);
 
     if (my $path = $self->conf->{global}{plugin_path}) {
