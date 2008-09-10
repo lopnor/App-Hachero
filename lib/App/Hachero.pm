@@ -5,18 +5,19 @@ use 5.00800;
 our $VERSION = '0.01';
 use Class::Component;
 use base qw(Class::Accessor::Fast);
-#use Params::Validate;
 use UNIVERSAL::require;
 use File::Spec;
-#use Log::Dispatch;
+use Module::Collect;
+
 __PACKAGE__->load_components(qw/Plaggerize Autocall::InjectMethod/);
-__PACKAGE__->mk_accessors(qw/currentline currentlog currentinfo result work_path/);
+__PACKAGE__->mk_accessors(qw/currentline currentlog currentinfo result work_path packages_from_plugin_path/);
 
 my $context;
 sub context { $context }
 
 sub new {
     my $class = shift;
+
     my $self = $class->SUPER::new(@_);
     $self->result({});
     $context = $self;
@@ -57,6 +58,35 @@ sub initialize {
     if( !-d $work_path ){
         mkdir $work_path;
     }
+}
+
+sub setup_plugins {
+    my ($self, @args) = @_;
+
+    my $class_component_plugins = $self->class_component_plugins;
+
+    $self->packages_from_plugin_path([]);
+
+    if (my $path = $self->conf->{global}{plugin_path}) {
+        my $collect = Module::Collect->new(
+            path => $path,
+            pattern => '*.pm',
+            prefix => 'App::Hachero::Plugin',
+        );
+        my $packages = $collect->modules;
+
+        $self->packages_from_plugin_path($packages);
+    }
+    $self->NEXT( setup_plugins => @args );
+}
+
+sub class_component_load_plugin_resolver {
+    my ($self, $package) = @_;
+    $package = "App::Hachero::Plugin::$package";
+    for my $pkg (@{ $self->packages_from_plugin_path }) {
+        return $pkg if $pkg->{package} eq $package;
+    }
+    return undef;
 }
 
 1;

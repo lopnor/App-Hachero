@@ -20,6 +20,8 @@ requires 'Regexp::Log::Common';
 requires 'File::Spec';
 requires 'File::Find::Rule';
 requires 'UNIVERSAL::require';
+requires 'IO::All';
+requires 'Module::Collect';
 
 build_requires 'Test::More';
 build_requires 'Test::Base';

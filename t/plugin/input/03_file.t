@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 4;
+use Test::More tests => 3;
 use App::Hachero;
 use IO::All;
 
@@ -29,10 +29,12 @@ for (@expected) {
     $_ > io(File::Spec->catfile($app->work_path,$_));
 }
 
+my @result;
 for (@expected) {
     $app->run_hook('input');
-    is $app->currentline, $_;
+    push @result, $app->currentline;
 }
+is_deeply [sort @result], \@expected;
 
 END {
     unlink glob File::Spec->catfile($app->work_path,'*'),
