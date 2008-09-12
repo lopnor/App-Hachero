@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 1;
+use Test::More tests => 2;
 use File::Spec;
 use App::Hachero;
 
@@ -20,3 +20,5 @@ my $config = {
 my $app = App::Hachero->new({config => $config});
 
 ok $app;
+$app->run_hook('input');
+is $app->currentline, 'ok';

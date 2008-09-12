@@ -26,6 +26,8 @@ requires 'Module::Collect';
 build_requires 'Test::More';
 build_requires 'Test::Base';
 
+install_script 'hachero.pl';
+
 tests 't/*.t t/*/*.t t/*/*/*.t';
 
 WriteAll;
