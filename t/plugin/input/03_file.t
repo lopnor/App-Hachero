@@ -9,7 +9,10 @@ BEGIN {
 }
 
 my $config = {
-    global => {work_path => 't/work'},
+    global => {
+        work_path => 't/work',
+        log => {level => 'error'},
+    },
     plugins => [
         {
             module => 'Input::File',

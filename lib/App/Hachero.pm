@@ -17,8 +17,16 @@ my $context;
 sub context { $context }
 
 sub new {
-    my $class = shift;
-    my $args = $_[0];
+    my ($class,$args) = @_;
+    $class->_setup_plugins_static($args);
+    my $self = $class->SUPER::new($args);
+    $self->result({});
+    $context = $self;
+    $self;
+}
+
+sub _setup_plugins_static {
+    my ($class, $args) = @_;
     my $config = $class->setup_config( $args->{config} );
 
     my @plugins;
@@ -35,13 +43,7 @@ sub new {
         );
         $packages_from_plugin_path = $collect->modules;
     }
-
     $class->load_plugins(@plugins);
-
-    my $self = $class->SUPER::new(@_);
-    $self->result({});
-    $context = $self;
-    $self;
 }
 
 sub run_hook_and_check {
@@ -52,15 +54,18 @@ sub run_hook_and_check {
 
 sub run {
     my $self = shift;
+    $self->log(debug => sprintf ('run start: %s', scalar localtime));
     $self->initialize;
     $self->run_hook('fetch');
     while( $self->set_currentline ){
         $self->run_hook_and_check('parse') or next;
         $self->run_hook_and_check('classify') or next;
         $self->run_hook_and_check('analyze') or next;
+        $self->run_hook('output_line');
     }
     $self->run_hook('associate');
     $self->run_hook('output');
+    $self->log(debug => sprintf ('run end: %s', scalar localtime));
 }
 
 sub set_currentline {

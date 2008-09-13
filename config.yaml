@@ -1,6 +1,3 @@
-global:
-  work_path: t/work
-
 plugins:
 
   - module: Input::Stdin
@@ -13,9 +10,11 @@ plugins:
     config: 
         time_zone: Asia/Tokyo
 
-  - module: Analyze::AccessCount
-
-  - module: Output::DBIC
-    config:
-        connect_info:
-            - dbi:mysql:test
+  - module: OutputLine::HadoopMap
+#  
+#  - module: Analyze::AccessCount
+#
+#  - module: Output::DBIC
+#    config:
+#        connect_info:
+#            - dbi:mysql:test

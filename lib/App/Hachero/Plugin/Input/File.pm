@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use base qw(App::Hachero::Plugin::Base);
 use File::Find::Rule;
+use File::stat;
 
 sub init {
     my ($self, $context) = @_;
@@ -11,10 +12,12 @@ sub init {
 sub _fetch {
     my ($self, $context) = @_;
     $self->{rule} ||= $self->_get_rule($context);
-    my $file;
-    while (1) {
-        $file = $self->{rule}->match or return;
-        $file !~ /^\.{1,2}/ and last;
+    my $file = $self->{rule}->match or return;
+
+    if ($context->conf->{global}->{log}->{level} eq 'debug') {
+        $context->log(debug => "opening file: $file");
+        $self->{readsize} = 0;
+        $self->{filesize} = stat($file)->size;
     }
     open my $fh, '<', $file or die;
     $self->{fh} = $fh;
@@ -33,6 +36,10 @@ sub input : Hook {
     until ($line) {
         my $fh = $self->{fh} || $self->_fetch($context) or return;
         $line = <$fh>;
+        if ($context->conf->{global}->{log}->{level} eq 'debug') {
+            $self->{readsize}+= do {use bytes; length $line} if $line;
+            print STDERR "\rreading file: $self->{readsize}/$self->{filesize}";
+        }
         unless ($line) {
             close $self->{fh};
             delete $self->{fh};

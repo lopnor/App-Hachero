@@ -8,7 +8,7 @@ BEGIN {
 }
 
 {
-    my $line = 'hogehoge';
+    my $line = 'hoge';
     my ($fh, $log) = File::Temp::tempfile;
     print $fh $line;
     close $fh;

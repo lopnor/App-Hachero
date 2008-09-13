@@ -13,9 +13,7 @@ my $config = {
         },
         {
             module => 'Analyze::AccessCount',
-            config => {
-
-            },
+            config => {truncate_to => 'hour'},
         }
     ]
 };
@@ -34,7 +32,8 @@ run {
     $app->currentlog($block->input);
     $app->run_hook('parse');
     $app->run_hook('analyze');
-    is_deeply $app->result->{'AccessCount'}, $block->expected;
+    my $value = (values %{$app->result->{AccessCount}})[0];
+    is_deeply $value, $block->expected;
 }
 
 __END__
@@ -55,9 +54,8 @@ ua: LWP/Simple
 useragent: '"LWP/Simple"'
 
 --- expected
-'2008-08-07 00:00:00': 
-    datetime: '2008-08-07 00:00:00'
-    count: 1
+datetime: '2008-08-07 00:00:00'
+count: 1
 
 === test2
 --- input
@@ -74,6 +72,6 @@ ua: ''
 useragent: '""'
 
 --- expected
-'2008-08-06 15:05:00':
-    datetime: '2008-08-06 15:05:00'
-    count: 1
+datetime: '2008-08-06 15:00:00'
+count: 1
+
