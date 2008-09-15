@@ -10,7 +10,18 @@ sub output : Hook {
     for my $key (keys %{$context->result}) {
         (my $table = $key) =~ s/\:\://g;
         for (values %{$context->result->{$key}}) {
-            $schema->resultset($table)->update_or_create($_);
+            my $rs = eval {$schema->resultset($table)};
+            $context->log(error => $!) if $@;
+            if ($rs) {
+                eval {
+                    $rs->update_or_create($_)
+                };
+                if ($@) {
+                    $context->log(error => $!);
+                }
+            } else {
+                $context->log(error => "$table not found");
+            }
         }
     }
 }
