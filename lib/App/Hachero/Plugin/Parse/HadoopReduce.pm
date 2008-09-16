@@ -2,20 +2,18 @@ package App::Hachero::Plugin::Parse::HadoopReduce;
 use strict;
 use warnings;
 use base 'App::Hachero::Plugin::Base';
-use JSON;
 
 sub parse : Hook {
     my ( $self, $context, $args ) = @_;
-    my $line = $context->currentline;
-    chomp $line;
-    my ($key, $value) = split(/\t/,$line);
-    $value = JSON->new->decode($value);
+    my ($key, $value) = split(/\t/,$context->currentline);
+    my $VAR1; # for Data::Dumper;
+    eval $value;
     my ($prime, $second) = split('-',$key);
     my $record = $context->result->{$prime}->{$second};
     if ($record) {
-        $record->{count} += $value->{count};
+        $record->{count} += $VAR1->{count};
     } else {
-        $context->result->{$prime}->{$second} = $value;
+        $context->result->{$prime}->{$second} = $VAR1;
     }
 }
 

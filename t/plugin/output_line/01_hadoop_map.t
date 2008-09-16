@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More tests => 3;
 use App::Hachero;
 use URI;
 use File::Temp;
@@ -25,14 +25,18 @@ open STDOUT, '>', $out;
 
 my $app = App::Hachero->new({config => $config});
 $app->result({
-        foo => {
-            bar => {a => 1, b => 2},
-        }
-    });
+    foo => {
+        bar => {a => 1, b => 2},
+    }
+});
 
 $app->run_hook('output_line');
 close STDOUT;
 
 my $contents < io $out;
+my ($key,$value) = split(/\t/,$contents);
 
-is $contents, qq(foo-bar\t{"a":1,"b":2}\n);
+is $key, 'foo-bar';
+my $VAR1;
+eval $value;
+is_deeply $VAR1, {a => 1, b => 2};
