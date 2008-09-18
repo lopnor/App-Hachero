@@ -8,7 +8,7 @@ use App::Hachero;
 
 BEGIN {
     if ($ENV{TEST_HACHERO_DBIC}) {
-        plan tests => 2;
+        plan tests => 3;
         use_ok('App::Hachero::Plugin::Output::DBIC');
     } else {
         plan skip_all => 'set "TEST_HACHERO_DBIC" to run this test.';
@@ -23,6 +23,7 @@ my $config = {
             config => {
                 connect_info => [
                     'dbi:mysql:test',
+                    'root',
                 ],
             }
         },
@@ -43,6 +44,7 @@ my $app = App::Hachero->new({config => $config});
     $app->run_hook('output');
     close STDOUT;
     my $log < io $file;
-    diag $log;
+#    diag $log;
+    like $log, qr/App::Hachero::Plugin::Output::DBIC \[error\]/;
     ok 1;
 }

@@ -22,6 +22,7 @@ requires 'File::Find::Rule';
 requires 'UNIVERSAL::require';
 requires 'IO::All';
 requires 'Module::Collect';
+requires 'HTTP::BrowserDetect';
 
 build_requires 'Test::More';
 build_requires 'Test::Base';
