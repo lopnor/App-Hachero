@@ -48,8 +48,13 @@ sub _setup_plugins_static {
 
 sub run_hook_and_check {
     my $self = shift;
-    $self->run_hook(@_);
-    return $self->currentline;
+    my $hook = shift;
+    $self->run_hook($hook);
+    unless ($self->currentline) {
+        $self->log(debug => "run_hook_and_check: $hook failed and skip this line.");
+        return 0;
+    }
+    1;
 }
 
 sub run {
