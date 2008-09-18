@@ -41,6 +41,9 @@ sub input : Hook {
             print STDERR "\rreading file: $self->{readsize}/$self->{filesize}";
         }
         unless ($line) {
+            if ($context->conf->{global}->{log}->{level} eq 'debug') {
+                print STDERR "\n";
+            }
             close $self->{fh};
             delete $self->{fh};
         }
