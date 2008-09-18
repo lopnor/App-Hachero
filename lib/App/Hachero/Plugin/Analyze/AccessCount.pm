@@ -12,10 +12,10 @@ sub analyze : Hook {
     my $time = DateTime::Format::MySQL->format_datetime(
         $req->{datetime}->clone->truncate(to => $truncate)
     );
-    my $hash = Digest::MD5::md5_base64($time);
-    $context->result->{'AccessCount'}->{$hash} = {
+    my $key = $req->{datetime}->epoch;
+    $context->result->{'AccessCount'}->{$key} = {
         datetime => $time,
-        count => ($context->result->{'AccessCount'}->{$hash}->{count} || 0) + 1,
+        count => ($context->result->{'AccessCount'}->{$key}->{count} || 0) + 1,
     }
 }
 
