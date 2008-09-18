@@ -10,7 +10,7 @@ sub analyze : Hook {
     my ($self, $context,$args) = @_;
     my $req = $context->currentinfo->{request} or return;
     my $browser = $context->currentinfo->{useragent} or return;
-    my $browser_string = $browser->browser_string;
+    my $browser_string = $browser->browser_string || '';
     my $truncate = $self->config->{config}->{truncate_to} || 'hour';
     my $time = $req->{datetime}->clone->truncate(to => $truncate);
     my $key = $time->epoch.$browser_string;
