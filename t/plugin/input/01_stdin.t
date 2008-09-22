@@ -9,9 +9,10 @@ BEGIN {
 
 {
     my $line = 'hoge';
-    my ($fh, $log) = File::Temp::tempfile;
+    my $fh = File::Temp->new;
     print $fh $line;
     close $fh;
+    my $log = $fh->filename;
 
     my $config = {
         plugins => [
@@ -23,5 +24,6 @@ BEGIN {
     open STDIN, '<', $log;
     my $app = App::Hachero->new({config => $config});
     $app->run_hook('input');
+    close STDIN;
     is $app->currentline, $line;
 }

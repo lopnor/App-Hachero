@@ -15,7 +15,9 @@ my $config = {
     ],
 };
 
-my $out = File::Temp->new->filename;
+my $fh = File::Temp->new;
+close $fh;
+my $out = $fh->filename;
 local *STDOUT;
 open STDOUT, '>', $out;
 
