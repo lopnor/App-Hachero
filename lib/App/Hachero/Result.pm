@@ -68,7 +68,9 @@ sub value {
 }
 
 sub count_up {
-    shift->{count}++;
+    my ($self, $n) = @_;
+    $n ||= 1;
+    shift->{count} += $n;
 }
 
 1;

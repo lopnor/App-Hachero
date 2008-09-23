@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 3;
+use Test::More tests => 4;
 use App::Hachero;
 use App::Hachero::Result;
 use URI;
@@ -43,4 +43,5 @@ my ($key,$value) = split(/\t/,$contents);
 is $key, "$primary-$secondary";
 my $VAR1;
 eval $value;
+isa_ok $VAR1, 'App::Hachero::Result::Data';
 is_deeply $VAR1, {a => 1, count => 1};

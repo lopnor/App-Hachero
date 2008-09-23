@@ -2,6 +2,7 @@ package App::Hachero::Plugin::Parse::HadoopReduce;
 use strict;
 use warnings;
 use base 'App::Hachero::Plugin::Base';
+use App::Hachero::Result;
 
 sub parse : Hook {
     my ( $self, $context, $args ) = @_;
@@ -11,7 +12,7 @@ sub parse : Hook {
     my ($prime, $second) = split('-',$key);
     my $record = $context->result->{$prime}->{$second};
     if ($record) {
-        $record->{count} += $VAR1->{count};
+        $record->count_up($VAR1->{count});
     } else {
         $context->result->{$prime}->{$second} = $VAR1;
     }
