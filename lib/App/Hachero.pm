@@ -103,3 +103,14 @@ sub class_component_load_plugin_resolver {
 }
 
 1;
+__END__
+
+=pod
+
+=head1 NAME
+
+=head1 SYNOPSYS
+
+=head1 DESCRIPTION
+
+=cut
