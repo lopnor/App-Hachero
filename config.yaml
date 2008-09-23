@@ -1,6 +1,12 @@
 plugins:
 
-  - module: Input::Stdin
+  - module: Input::File
+    config:
+        path: /var/log/httpd
+        rule:
+            name: journal.access_log*
+            age:
+                newer: 1D
 
   - module: Parse::Common
     config:
@@ -9,12 +15,19 @@ plugins:
   - module: Parse::Normalize
     config: 
         time_zone: Asia/Tokyo
+  
+  - module: Classify::AccessTime
+    config:
+        timezone: Asia/Tokyo
+        from:
+            subtract:
+                days: 1
+        to:
+            subtract:
+                days: 0
+  
+  - module: Analyze::AccessCount
+    config:
+        truncate_to: hour
 
-  - module: OutputLine::HadoopMap
-#  
-#  - module: Analyze::AccessCount
-#
-#  - module: Output::DBIC
-#    config:
-#        connect_info:
-#            - dbi:mysql:test
+  - module: Output::Dump

@@ -32,7 +32,10 @@ sub _setup_plugins_static {
     my @plugins;
     my $plugin_list = $config->{global}->{pluginloader}->{plugin_list};
     for my $plugin (@{ $config->{$plugin_list} }) {
-        push @plugins, { module => $plugin->{module}, config => $plugin };
+        push @plugins, { 
+            module => $plugin->{module}, 
+            config => $plugin,
+        };
     }
 
     if (my $path = $config->{global}{plugin_path}) {
