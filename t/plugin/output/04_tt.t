@@ -64,9 +64,18 @@ Hoge:
     - key: bar
     - key: hooo
 --- template
-[% FOR i IN Hoge.values -%]
-[% i.key %]: [% i.count %]
+[% FOR r IN result -%]
+[% r.key %]
+[% FOR i IN r.value.values -%]
+[% FOR k IN i.keys -%]
+[% k %]: [% i.value(k) %]
+[% END -%]
+[% END -%]
 [% END -%]
 --- expected
-bar: 2
-hooo: 3
+Hoge
+key: bar
+count: 2
+key: hooo
+count: 3
+

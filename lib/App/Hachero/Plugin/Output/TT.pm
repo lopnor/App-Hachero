@@ -11,9 +11,9 @@ sub output : Hook {
     my $out_file = $self->config->{config}->{out};
     my $tt = Template->new;
     my $template < io $tt_file;
-    $tt->process(\$template, $context->result, \my $out);
+    $tt->process(\$template, $context, \my $out);
     $out > io $out_file;
 }
 
 1;
-
+__DATA__

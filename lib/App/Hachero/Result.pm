@@ -16,8 +16,8 @@ sub new {
 sub push {
     my ($self, $args) = @_;
     my $key = $self->key($args);
-    $self->data->{$key} ||= $args;
-    $self->data->{$key}->{count}++;
+    $self->data->{$key} ||= App::Hachero::Result::Data->new($args);
+    $self->data->{$key}->count_up;
 }
 
 sub values {
@@ -48,6 +48,27 @@ sub cmp {
 sub key {
     my ($self, $args) = @_;
     md5_hex (map {$args->{$_}} @{$self->primary});
+}
+
+package App::Hachero::Result::Data;
+
+sub new {
+    my ($class, $self) = @_;
+    bless $self, $class;
+}
+
+sub keys {
+    my $self = shift;
+    return sort {$a eq 'count' ? 1 : 0} keys %{$self};
+}
+
+sub value {
+    my ($self, $arg) = @_;
+    return $self->{$arg};
+}
+
+sub count_up {
+    shift->{count}++;
 }
 
 1;
