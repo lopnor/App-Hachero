@@ -2,6 +2,7 @@ use strict;
 use warnings;
 use Test::Base;
 use App::Hachero;
+use App::Hachero::Result;
 use App::Hachero::Plugin::Output::DBIC;
 
 if ($ENV{TEST_HACHERO_DBIC}) {
@@ -40,7 +41,13 @@ run {
     my $exp = $block->expected;
     my $rs = $schema->resultset($exp->{tablename});
     $rs->delete_all;
-    $app->result($block->input);
+    my ($key, $value) = %{$block->input};
+    my $res = App::Hachero::Result->new;
+    for (@{$value}) {
+        $res->primary([ keys %{$_} ]) unless $res->primary;
+        $res->push($_); 
+    }
+    $app->result({$key => $res});
     $app->run_hook('output');
     my @rows = $rs->all;
     is @rows, scalar @{$exp->{rows}}; 
@@ -57,12 +64,13 @@ __END__
 === test1
 --- input
 AccessCount:
-    '2008-08-21 18:13:00':
-        datetime: '2008-08-21 18:13:00'
-        count: 5
-    '2008-08-21 18:14:00':
-        datetime: '2008-08-21 18:14:00'
-        count: 2
+    - datetime: '2008-08-21 18:13:00'
+    - datetime: '2008-08-21 18:13:00'
+    - datetime: '2008-08-21 18:13:00'
+    - datetime: '2008-08-21 18:13:00'
+    - datetime: '2008-08-21 18:13:00'
+    - datetime: '2008-08-21 18:14:00'
+    - datetime: '2008-08-21 18:14:00'
 --- expected
 tablename: AccessCount
 rows:

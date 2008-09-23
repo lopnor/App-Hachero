@@ -32,7 +32,7 @@ run {
     $app->currentlog($block->input);
     $app->run_hook('parse');
     $app->run_hook('analyze');
-    my $value = (values %{$app->result->{AccessCount}})[0];
+    my $value = (values %{$app->result->{AccessCount}->data})[0];
     is_deeply $value, $block->expected;
 }
 

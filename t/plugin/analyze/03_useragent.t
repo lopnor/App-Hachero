@@ -36,7 +36,8 @@ run {
     $app->run_hook('parse');
     $app->run_hook('classify');
     $app->run_hook('analyze');
-    my $value = (values %{$app->result->{UserAgent}})[0];
+    my $res = $app->result->{UserAgent};
+    my $value = (values %{$app->result->{UserAgent}->data})[0];
     is_deeply $value, $block->expected;
 }
 

@@ -10,7 +10,7 @@ sub output_line : Hook {
     local $Data::Dumper::Indent = 0;
     local $Data::Dumper::Terse = 0;
     for my $prime_key (keys %{$context->result}) {
-        my $result = $context->result->{$prime_key};
+        my $result = $context->result->{$prime_key}->data;
         for my $second_key (keys %{$result}) {
             my $value = Dumper $result->{$second_key};
             printf $fh "%s-%s\t%s\n", $prime_key, $second_key, $value;

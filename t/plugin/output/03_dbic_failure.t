@@ -23,7 +23,6 @@ my $config = {
             config => {
                 connect_info => [
                     'dbi:mysql:test',
-                    'root',
                 ],
             }
         },

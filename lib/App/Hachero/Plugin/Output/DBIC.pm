@@ -7,21 +7,29 @@ sub output : Hook {
     my ($self, $context, $args) = @_;
     my $schema = App::Hachero::Plugin::Output::DBIC::Schema
         ->connect(@{$self->config->{config}->{connect_info}});
+    unless ($schema) {
+        $context->log(error => "connection error");
+        return;
+    }
     for my $key (keys %{$context->result}) {
         (my $table = $key) =~ s/\:\://g;
-        for (values %{$context->result->{$key}}) {
-            my $rs = eval {$schema->resultset($table)};
-            $context->log(error => $!) if $@;
-            if ($rs) {
+        my $rs = eval {$schema->resultset($table)};
+        if ($@) {
+            $context->log(error => $!);
+            next;
+        }
+        if ($rs) {
+            my $result = $context->result->{$key};
+            for my $data ($result->values) {
                 eval {
-                    $rs->update_or_create($_)
+                    $rs->update_or_create($data)
                 };
                 if ($@) {
                     $context->log(error => $!);
                 }
-            } else {
-                $context->log(error => "$table not found");
             }
+        } else {
+            $context->log(error => "$table not found");
         }
     }
 }

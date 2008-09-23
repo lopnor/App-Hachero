@@ -11,10 +11,16 @@ sub analyze : Hook {
     my $truncate = $self->config->{config}->{truncate_to} || 'minute';
     my $time = $req->{datetime}->clone->truncate(to => $truncate);
     my $key = $time->epoch;
-    $context->result->{'AccessCount'}->{$key} = {
-        datetime => DateTime::Format::MySQL->format_datetime($time),
-        count => ($context->result->{'AccessCount'}->{$key}->{count} || 0) + 1,
-    }
+    $context->result->{AccessCount} ||= App::Hachero::Result::AccessCount->new;
+    $context->result->{AccessCount}->push(
+        {
+            datetime => DateTime::Format::MySQL->format_datetime($time),
+        }
+    );
 }
+
+package App::Hachero::Result::AccessCount;
+use base qw(App::Hachero::Result);
+__PACKAGE__->mk_classdata(primary => ['datetime']);
 
 1;

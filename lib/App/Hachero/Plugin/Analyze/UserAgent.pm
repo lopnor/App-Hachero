@@ -15,11 +15,18 @@ sub analyze : Hook {
     my $time = $req->{datetime}->clone->truncate(to => $truncate);
     my $key = $time->epoch.$browser_string;
 
-    $context->result->{'UserAgent'}->{$key} = {
-        datetime => DateTime::Format::MySQL->format_datetime($time),
-        useragent => $browser_string,
-        count => ($context->result->{'UserAgent'}->{$key}->{count} || 0) + 1,
-    };
+    $context->result->{UserAgent} ||= App::Hachero::Result::UserAgent->new;
+    
+    $context->result->{UserAgent}->push(
+        {
+            datetime => DateTime::Format::MySQL->format_datetime($time),
+            useragent => $browser_string,
+        }
+    );
 }
+
+package App::Hachero::Result::UserAgent;
+use base qw(App::Hachero::Result);
+__PACKAGE__->mk_classdata('primary' => [qw(datetime useragent)]);
 
 1;
