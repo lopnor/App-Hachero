@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use base qw(App::Hachero::Plugin::Base);
 use File::Find::Rule;
+use File::Find::Rule::Age;
 use File::stat;
 
 sub init {
@@ -25,8 +26,18 @@ sub _fetch {
 
 sub _get_rule {
     my ($self, $context) = @_;
-    my $work_path = $context->work_path;
-    $self->{rule} = File::Find::Rule->file()->start( $work_path );
+    my $path = $self->config->{config}->{path} || $context->work_path;
+    my $rule = File::Find::Rule->file();
+    my $config = $self->config->{config}->{rule};
+    for my $key (keys %{$config}) {
+        my $value = $config->{$key};
+        $rule->$key(
+            ref $value eq 'HASH' ? %{$value} :
+            ref $value eq 'ARRAY' ? @{$value} :
+            $value
+        );
+    }
+    $self->{rule} = $rule->start( $path );
     return $self->{rule};
 }
 
