@@ -22,7 +22,7 @@ sub output : Hook {
             my $result = $context->result->{$key};
             for my $data ($result->values) {
                 eval {
-                    $rs->update_or_create($data)
+                    $rs->update_or_create($data->hashref)
                 };
                 if ($@) {
                     $context->log(error => $!);

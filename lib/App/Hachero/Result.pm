@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use base qw(Class::Accessor::Fast Class::Data::Inheritable);
 use Digest::MD5 qw(md5_hex);
+use App::Hachero::Result::Data;
 __PACKAGE__->mk_classdata('primary');
 __PACKAGE__->mk_accessors(qw(data arrayref));
 
@@ -48,29 +49,6 @@ sub cmp {
 sub key {
     my ($self, $args) = @_;
     md5_hex (map {$args->{$_}} @{$self->primary});
-}
-
-package App::Hachero::Result::Data;
-
-sub new {
-    my ($class, $self) = @_;
-    bless $self, $class;
-}
-
-sub keys {
-    my $self = shift;
-    return sort {$a eq 'count' ? 1 : 0} keys %{$self};
-}
-
-sub value {
-    my ($self, $arg) = @_;
-    return $self->{$arg};
-}
-
-sub count_up {
-    my ($self, $n) = @_;
-    $n ||= 1;
-    shift->{count} += $n;
 }
 
 1;
