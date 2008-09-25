@@ -4,6 +4,7 @@ use warnings;
 use base qw(App::Hachero::Plugin::Base);
 use DateTime::Format::HTTP;
 use URI;
+use URI::QueryParam;
 
 sub parse : Hook {
     my ($self, $context, $args) = @_;
@@ -18,7 +19,7 @@ sub parse : Hook {
     }
     $info->{request} = {
         method   => $req[0],
-        uri      => URI->new($req[1]),
+        uri      => URI->new($req[1], 'http'),
         protocol => $req[2] || 'HTTP/0.9',
         datetime => $datetime,
     };

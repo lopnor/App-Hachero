@@ -22,7 +22,7 @@ run {
     $app->currentlog($block->input);
     $app->currentinfo( {} );
     $app->run_hook('classify');
-    is $app->currentinfo->{useragent}->browser_string, $block->expected;
+    is $app->currentinfo->{useragent}->name, $block->expected;
 }
 
 __END__
@@ -30,7 +30,7 @@ __END__
 --- input
 ua: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)
 --- expected
-MSIE
+Internet Explorer
 
 === Firefox
 --- input

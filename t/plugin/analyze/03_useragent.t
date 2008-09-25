@@ -60,7 +60,7 @@ useragent: '"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1; .NET CLR 1.
 
 --- expected
 datetime: '2008-08-07 00:00:00'
-useragent: 'MSIE'
+useragent: 'Internet Explorer'
 count: 1
 
 === test2

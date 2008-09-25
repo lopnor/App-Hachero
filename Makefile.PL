@@ -22,7 +22,7 @@ requires 'File::Find::Rule';
 requires 'UNIVERSAL::require';
 requires 'IO::All';
 requires 'Module::Collect';
-requires 'HTTP::BrowserDetect';
+requires 'HTTP::DetectUserAgent';
 requires 'File::Find::Rule::Age';
 requires 'Template';
 
