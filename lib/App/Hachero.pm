@@ -68,11 +68,12 @@ sub run {
     while( $self->set_currentline ){
         $self->run_hook_and_check('parse') or next;
         $self->run_hook_and_check('classify') or next;
+        $self->run_hook_and_check('filter') or next;
         $self->run_hook_and_check('analyze') or next;
         $self->run_hook('output_line');
     }
-    $self->run_hook('associate');
     $self->run_hook('output');
+    $self->run_hook('cleanup');
     $self->log(debug => sprintf ('run end: %s', scalar localtime));
 }
 

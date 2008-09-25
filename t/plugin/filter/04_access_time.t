@@ -15,7 +15,7 @@ my $config = {
     global => {log => {level => 'error'}},
     plugins => [
         {
-            module => 'Classify::AccessTime',
+            module => 'Filter::AccessTime',
             config => {
                 time_zone => 'local',
                 from => {
