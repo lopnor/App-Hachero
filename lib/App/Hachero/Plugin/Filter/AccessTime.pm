@@ -1,4 +1,4 @@
-package App::Hachero::Plugin::Classify::AccessTime;
+package App::Hachero::Plugin::Filter::AccessTime;
 use strict;
 use warnings;
 use base qw(App::Hachero::Plugin::Base);
@@ -18,7 +18,7 @@ sub init {
     }
 }
 
-sub classify : Hook {
+sub filter : Hook {
     my ($self, $context, $args) = @_;
 
     my $date = $context->currentinfo->{request}->{datetime} or return;

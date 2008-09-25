@@ -37,7 +37,7 @@ run {
                      ->truncate( to => 'day' )
                      ->subtract(%{$block->input});
     $app->currentinfo({request => {datetime => $dt}});
-    $app->run_hook('classify');
+    $app->run_hook('filter');
     is $app->currentline, $block->expected;
 };
 
