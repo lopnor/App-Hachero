@@ -26,15 +26,15 @@ filters {
     expected => [qw(yaml)],
 };
 
+$app->result({});
 run {
     my $block = shift;
-    $app->result({});
     $app->currentinfo({});
     $app->currentlog($block->input);
     $app->run_hook('parse');
     $app->run_hook('analyze');
-    my $value = ($app->result->{AccessCount}->values)[0];
-    is_deeply $value, $block->expected;
+    my @value = $app->result->{AccessCount}->values;
+    is_deeply $value[0], $block->expected;
 }
 
 __END__
