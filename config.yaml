@@ -16,7 +16,7 @@ plugins:
     config: 
         time_zone: Asia/Tokyo
   
-  - module: Classify::AccessTime
+  - module: Filter::AccessTime
     config:
         timezone: Asia/Tokyo
         from:
