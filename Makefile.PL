@@ -23,6 +23,8 @@ requires 'UNIVERSAL::require';
 requires 'IO::All';
 requires 'Module::Collect';
 requires 'HTTP::BrowserDetect';
+requires 'File::Find::Rule::Age';
+requires 'Template';
 
 build_requires 'Test::More';
 build_requires 'Test::Base';
