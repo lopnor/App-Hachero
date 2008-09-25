@@ -2,6 +2,7 @@ use strict;
 use warnings;
 use Test::Base;
 use App::Hachero;
+use App::Hachero::Result;
 
 plan tests => (1 * blocks);
 
@@ -32,7 +33,7 @@ run {
     $app->currentlog($block->input);
     $app->run_hook('parse');
     $app->run_hook('analyze');
-    my $value = (values %{$app->result->{AccessCount}->data})[0];
+    my $value = ($app->result->{AccessCount}->values)[0];
     is_deeply $value, $block->expected;
 }
 
