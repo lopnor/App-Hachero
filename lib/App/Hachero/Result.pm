@@ -30,15 +30,12 @@ sub values {
 sub sort {
     my $self = shift;
     $self->arrayref([]);
-    my $package = ref $self;
-    no strict 'refs';
-    my $cmp = *{"$package\::cmp"};
-    for my $value (sort $cmp CORE::values %{$self->data}) {
+    for my $value (sort _cmp CORE::values %{$self->data}) {
         CORE::push @{$self->arrayref}, $value;
     }
 }
 
-sub cmp {
+sub _cmp {
     for (@{__PACKAGE__->primary}) {
         if (my $res = $a->{$_} cmp $b->{$_}) {
             return $res;
