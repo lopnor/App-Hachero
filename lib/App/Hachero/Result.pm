@@ -48,3 +48,50 @@ sub key {
 }
 
 1;
+__END__
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+App::Hachero::Result - represents a series of result of App::Hachero
+
+=head1 SYNOPSYS
+
+=head1 DESCRIPTION
+
+=head1 METHODS
+
+=head2 new
+
+=head2 push($hashref)
+
+pushes new data hashref to the result and set count of the data to 1.
+
+=head2 values
+
+returns data array of this result.
+
+=head2 sort
+
+sorts data array for values method. you can override this method for your result class.
+
+=head2 key($data) (internal use only)
+
+returns md5_hex key for the result data.
+
+=head1 AUTHOR
+
+Takaaki Mizuno <cpan@takaaki.info>
+
+Nobuo Danjou <nobuo.danjou@gmail.com>
+
+=head1 SEE ALSO
+
+L<App::Hachero>
+
+L<App::Hachero::Result::Data>
+
+=cut

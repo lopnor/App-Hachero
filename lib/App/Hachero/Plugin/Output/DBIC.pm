@@ -34,9 +34,41 @@ sub output : Hook {
     }
 }
 
-package App::Hachero::Plugin::Output::DBIC::Schema;
+package # hide from PAUSE
+    App::Hachero::Plugin::Output::DBIC::Schema;
 use base qw(DBIx::Class::Schema::Loader);
 
 __PACKAGE__->load_classes;
 
 1;
+__END__
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+App::Hachero::Plugin::Output::DBIC - writes results to databases via DBIx::Class
+
+=head1 SYNOPSYS
+
+=head1 DESCRIPTION
+
+=head1 IMPLEMENTED HOOKS
+    
+=head2 output
+
+=head1 AUTHOR
+
+Takaaki Mizuno <cpan@takaaki.info>
+
+Nobuo Danjou <nobuo.danjou@gmail.com>
+
+=head1 SEE ALSO
+
+L<App::Hachero>
+
+L<DBIx::Class::Schema::Loader>
+
+=cut

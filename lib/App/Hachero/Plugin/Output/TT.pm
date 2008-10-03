@@ -16,4 +16,32 @@ sub output : Hook {
 }
 
 1;
-__DATA__
+__END__
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+App::Hachero::Plugin::Output::TT - writes results via template toolkit
+
+=head1 SYNOPSYS
+
+=head1 DESCRIPTION
+
+=head1 IMPLEMENTED HOOKS
+    
+=head2 output
+
+=head1 AUTHOR
+
+Nobuo Danjou <nobuo.danjou@gmail.com>
+
+=head1 SEE ALSO
+
+L<App::Hachero>
+
+L<Template>
+
+=cut

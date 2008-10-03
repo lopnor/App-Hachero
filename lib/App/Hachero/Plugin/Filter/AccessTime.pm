@@ -29,3 +29,32 @@ sub filter : Hook {
 }
 
 1;
+__END__
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+App::Hachero::Plugin::Filter::AccessTime - excludes requests in specified time
+
+=head1 SYNOPSYS
+
+=head1 DESCRIPTION
+
+=head1 IMPLEMENTED HOOKS
+    
+=head2 filter
+
+=head1 AUTHOR
+
+Takaaki Mizuno <cpan@takaaki.info>
+
+Nobuo Danjou <nobuo.danjou@gmail.com>
+
+=head1 SEE ALSO
+
+L<App::Hachero>
+
+=cut

@@ -1,30 +1,32 @@
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More;
 use App::Hachero;
 
-
 BEGIN {
-    use_ok('App::Hachero::Plugin::Input::FTP');
+    if ($ENV{HACHERO_TEST_FTP}) {
+        plan tests => 2;
+        use_ok('App::Hachero::Plugin::Input::FTP');
+    } else {
+        plan skip_all => 'set "TEST_HACHERO_FTP" to run this test.';
+        exit 0;
+    }
 }
 
-SKIP: {
-    my $config = {
-        plugins => [
-            {
-                module => 'Input::FTP',
-                config => {
-                    host => 'ftp.riken.jp',
-                    username => 'anonymous',
-                    file => '/lang/CPAN/README',
-                }
-            }
-        ],
-    };
-    my $app = App::Hachero->new({config => $config});
-#    $app->run_hook('fetch');
-    $app->run_hook('input');
-    ok $app->currentline;
-}
+my $config = {
+    plugins => [
+    {
+        module => 'Input::FTP',
+        config => {
+            host => 'ftp.riken.jp',
+            username => 'anonymous',
+            file => '/lang/CPAN/README',
+        }
+    }
+    ],
+};
+my $app = App::Hachero->new({config => $config});
+$app->run_hook('input');
+ok $app->currentline;
 
 1;

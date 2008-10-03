@@ -46,6 +46,8 @@ run {
     $app->run_hook('output');
     my $output < io $out;
     is $output, $block->expected;
+    unlink $template;
+    unlink $out;
 }
 
 __END__

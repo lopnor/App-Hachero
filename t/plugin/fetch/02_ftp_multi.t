@@ -1,11 +1,17 @@
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More;
 use App::Hachero;
 use File::Spec;
 
 BEGIN {
-    use_ok('App::Hachero::Plugin::Fetch::FTP');
+    if ($ENV{HACHERO_TEST_FTP}) {
+        plan tests => 2;
+        use_ok('App::Hachero::Plugin::Fetch::FTP');
+    } else {
+        plan skip_all => 'set "TEST_HACHERO_FTP" to run this test.';
+        exit 0;
+    }
 }
 
 my $config = {

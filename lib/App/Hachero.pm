@@ -50,8 +50,7 @@ sub _setup_plugins_static {
 }
 
 sub run_hook_and_check {
-    my $self = shift;
-    my $hook = shift;
+    my ($self, $hook) = @_;
     $self->run_hook($hook);
     unless ($self->currentline) {
         $self->log(debug => "run_hook_and_check: $hook failed and skip this line.");
@@ -108,10 +107,77 @@ __END__
 
 =pod
 
+=encoding utf-8
+
 =head1 NAME
+
+App::Hachero - a plaggable log analyzing framework
 
 =head1 SYNOPSYS
 
+  % hachero.pl -c config.yaml
+
 =head1 DESCRIPTION
+
+=head1 METHODS
+
+=head2 new({config => $config})
+
+instanciates App::Hachero application. you can pass config in Plagger style.
+
+=head2 initialize (internal use only)
+
+setups work directory.
+
+=head2 run
+
+runs the application.
+
+=head2 context
+
+returns context object of the application.
+
+=head2 set_currentline (internal use only)
+
+cleanups $context->currentline before input new line.
+
+=head2 run_hook_and_check($hook)
+
+runs specified hook and checks whether currentline exists. returns 1 if 
+currentline exists.
+
+=head2 class_component_load_plugin_resolver
+
+returns plugin modules in plugin_path for Class::Component.
+
+=head1 AUTHOR
+
+Takaaki Mizuno <cpan@takaaki.info>
+
+Nobuo Danjou <nobuo.danjou@gmail.com>
+
+=head1 SEE ALSO
+
+L<Plagger>
+
+L<Class::Component>
+
+L<Class::Component::Component::Plaggerize>
+
+L<Class::Component::Component::DisableDynamicPlugin>
+
+L<App::MadEye>
+
+=head1 REPOSITORY
+
+  svn co http://svn.coderepos.org/share/lang/perl/App-Hachero/trunk hachero
+
+The svn repository of this module is hosted at L<http://coderepos.org/share/>.
+Patches and commits are welcome.
+
+=head1 LICENSE
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut

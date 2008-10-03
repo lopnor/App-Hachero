@@ -33,3 +33,32 @@ sub fetch : Hook {
 }
 
 1;
+__END__
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+App::Hachero::Plugin::Fetch::FTP - fetchs logs from FTP server
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
+
+=head1 IMPLEMENTED HOOKS
+
+=head2 fetch
+
+=head1 AUTHOR
+
+Takaaki Mizuno <cpan@takaaki.info>
+
+Nobuo Danjou <nobuo.danjou@gmail.com>
+
+=head1 SEE ALSO
+
+L<App::Hachero>
+
+=cut

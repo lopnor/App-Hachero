@@ -24,8 +24,38 @@ sub analyze : Hook {
     );
 }
 
-package App::Hachero::Result::UserAgent;
+package # hide from PAUSE
+    App::Hachero::Result::UserAgent;
 use base qw(App::Hachero::Result);
 __PACKAGE__->mk_classdata('primary' => [qw(datetime useragent)]);
 
 1;
+__END__
+
+=pod
+
+=encoding utf8
+
+=head1 NAME
+
+App::Hachero::Plugin::Analyze::UserAgent - simple analyzer for App::Hachero
+
+=head1 SYNOPSYS
+
+=head1 DESCRIPTION
+
+=head1 IMPLEMENTED HOOKS
+    
+=head2 analyze
+
+=head1 AUTHOR
+
+Takaaki Mizuno <cpan@takaaki.info>
+
+Nobuo Danjou <nobuo.danjou@gmail.com>
+
+=head1 SEE ALSO
+
+L<App::Hachero>
+
+=cut
