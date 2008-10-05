@@ -37,11 +37,33 @@ __END__
 
 =head1 NAME
 
-App::Hachero::Result::Data - represents a result data of App::Hachero
+App::Hachero::Result::Data - a class to store analyzed data of Hachero
 
 =head1 SYNOPSYS
 
+  my $data = App::Hachero::Result::Data->new(
+      {
+          foo => 'bar',
+          hoge => 'fuga',
+      }
+  );
+  $data->count_up;
+
+  my @keys = $data->keys;
+  # qw(foo hoge count)
+
+  my $value = $data->value('count');
+  # 1
+  $data->count_up(4)
+  $value = $data->value('count');
+  # 5
+
+  my $hashref = $data->hashref;
+  # { foo => 'bar', hoge => 'fuga', count => 5 }
+
 =head1 DESCRIPTION
+
+A class to store analyzed data of Hachero.
 
 =head1 METHODS
 

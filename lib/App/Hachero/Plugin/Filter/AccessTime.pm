@@ -41,11 +41,29 @@ App::Hachero::Plugin::Filter::AccessTime - excludes requests in specified time
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Filter::AccessTime
+      config:
+        time_zone: Asia/Tokyo
+        from:
+            subtract:
+                days: 1
+        to:
+            subtract:
+                days: 0
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
+excludes requests in specified time.
+
+=head2 implemented hooks
+
+=over 4
     
-=head2 filter
+=item * filter
+
+=back
 
 =head1 AUTHOR
 

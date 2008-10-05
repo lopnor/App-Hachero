@@ -45,11 +45,29 @@ App::Hachero::Plugin::Fetch::FTP - fetchs logs from FTP server
 
 =head1 SYNOPSIS
 
+  ---
+  global:
+    work_path: /path/to/your/work_path
+  plugins:
+    - module: Fetch::FTP
+      config:
+        host: ftp.example.com
+        port: 2121
+        username: your_name
+        password: your_password
+        file: /path/to/your/log*
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
+fetchs logs from FTP server.
 
-=head2 fetch
+=head2 implemented hooks
+
+=over 4
+
+=item * fetch
+
+=back
 
 =head1 AUTHOR
 

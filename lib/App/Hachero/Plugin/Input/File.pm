@@ -77,11 +77,27 @@ App::Hachero::Plugin::Input::File - reads logs from specified direcotry
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Input::File
+      config:
+        path: /var/log/httpd
+        rule:
+            name: access_log*
+            age:
+                newer: 4D
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
-    
-=head2 input 
+reads logs from specified direcotry.
+
+=head2 implemented hooks
+
+=over 4
+
+=item * input 
+
+=back
 
 =head1 AUTHOR
 
@@ -92,5 +108,9 @@ Nobuo Danjou <nobuo.danjou@gmail.com>
 =head1 SEE ALSO
 
 L<App::Hachero>
+
+L<File::Find::Rule>
+
+L<File::Find::Rule::Age>
 
 =cut

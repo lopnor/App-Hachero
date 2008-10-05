@@ -60,15 +60,51 @@ App::Hachero::Result - represents a series of result of App::Hachero
 
 =head1 SYNOPSYS
 
+  my $r = App::Hachero::Result->new;
+  $r->push(
+    {
+        'some_key' => 'some_value',
+        'another_key' => 'another_value',
+    }
+  );
+
+  my @result = $r->values;
+
 =head1 DESCRIPTION
+
+A class to store analyzed data from Hachero. You can override
+this result class in your analyze plugin class like this:
+
+  package App::Hachero::Plugin::Analyze::MyAnalyzer;
+  use base 'App::Hachero::Plugin::Base';
+
+  sub analyze : Hook {
+      my ($self, $context) = @_;
+      $context->result->{MyAnalyzer} = App::Hachero::Result::MyAnalyzer->new;
+      $context->result->{MyAnalizer}->push(
+        {
+            mykey => 'hoo',
+        }
+      );
+  }
+
+  package App::Hachero::Result::MyAnalyzer;
+  use base 'App::Hachero::Result';
+  __PACKAGE__->mk_classdata('primary' => [qw(mykey)]);
+
+  1;
+
+You need to specify 'primary' arrayref classdata in your subclass.
 
 =head1 METHODS
 
 =head2 new
 
+constructor.
+
 =head2 push($hashref)
 
-pushes new data hashref to the result and set count of the data to 1.
+pushes new data hashref to the result and counts up the data.
 
 =head2 values
 

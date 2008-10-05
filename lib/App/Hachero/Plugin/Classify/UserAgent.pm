@@ -28,11 +28,21 @@ App::Hachero::Plugin::Classify::UserAgent - sets useragent information for the r
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Classify::UserAgent
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
+sets useragent information for the request.
+
+=head2 IMPLEMENTED HOOKS
+
+=over 4
     
-=head2 classify
+=item * classify
+
+=back
 
 =head1 AUTHOR
 

@@ -28,15 +28,25 @@ __END__
 
 =head1 NAME
 
-App::Hachero::Plugin::OutputLine::HadoopMap - outpts results with hadoop format
+App::Hachero::Plugin::OutputLine::HadoopMap - outputs results with hadoop format
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: OutputLine::HadoopMap
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
+outputs results with hadoop format
+
+=head2 implemented hooks
+
+=over 4
     
-=head2 output_line
+=item * output_line
+
+=back
 
 =head1 AUTHOR
 

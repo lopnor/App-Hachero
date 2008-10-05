@@ -53,11 +53,26 @@ App::Hachero::Plugin::Output::DBIC - writes results to databases via DBIx::Class
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Output::DBIC
+      config:
+        connect_info:
+            - dbi:mysql:dbhost=db.local;dbname=logdb
+            - your_name
+            - your_password
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
+writes results to databases via DBIx::Class
+
+=head2 implemented hooks
+
+=over 4
     
-=head2 output
+=item * output
+
+=back
 
 =head1 AUTHOR
 

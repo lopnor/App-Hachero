@@ -33,11 +33,23 @@ App::Hachero::Plugin::Parse::Common - parses common apache logs
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Parse::Common
+      config:
+        format: ':common'
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
-    
-=head2 parse
+parses common apache logs
+
+=head2 implemented hooks
+
+=over 4
+
+=item * parse
+
+=back
 
 =head1 AUTHOR
 

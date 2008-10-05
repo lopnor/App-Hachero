@@ -31,11 +31,21 @@ App::Hachero::Plugin::Parse::HadoopReduce - parses line from A::H::P::OutputLine
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Parse::HadoopReduce
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
-    
-=head2 parse
+parses line from A::H::P::OutputLine::HadoopMap
+
+=head2 implemented hooks
+
+=over 4
+
+=item * parse
+
+=back
 
 =head1 AUTHOR
 

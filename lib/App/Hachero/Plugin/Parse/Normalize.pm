@@ -38,11 +38,23 @@ App::Hachero::Plugin::Parse::Normalize - normalizes request informations set by 
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Parse::Normalize
+      config:
+        time_zone: Asia/Tokyo
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
+normalizes request informations set by Parse::Common
+
+=head2 implemented hooks
+
+=over 4
     
-=head2 parse
+=item * parse
+
+=back
 
 =head1 AUTHOR
 

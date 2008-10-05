@@ -28,11 +28,21 @@ App::Hachero::Plugin::Input::Stdin - reads logs from STDIN
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    module: Input::Stdin
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
-    
-=head2 input 
+reads logs from STDIN.
+
+=head2 implemented hooks
+
+=over 4
+
+=item * input 
+
+=back
 
 =head1 AUTHOR
 

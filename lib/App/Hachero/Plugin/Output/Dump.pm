@@ -23,11 +23,21 @@ App::Hachero::Plugin::Output::Dump - dumps result to STDOUT (for debug)
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Output::Dump
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
+dumps result to STDOUT (for debug)
+
+=head2 implemented hooks
+
+=over 4
     
-=head2 output
+=item * output
+
+=back
 
 =head1 AUTHOR
 

@@ -13,7 +13,6 @@ sub analyze : Hook {
     my $browser_string = $browser->name || 'Unknown';
     my $truncate = $self->config->{config}->{truncate_to} || 'hour';
     my $time = $req->{datetime}->clone->truncate(to => $truncate);
-    my $key = $time->epoch.$browser_string;
 
     $context->result->{UserAgent} ||= App::Hachero::Result::UserAgent->new;
     $context->result->{UserAgent}->push(
@@ -42,11 +41,22 @@ App::Hachero::Plugin::Analyze::UserAgent - simple analyzer for App::Hachero
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Analyze::UserAgent
+      config:
+        truncate_to: hour
+        
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
+=head2 implemented hooks
     
-=head2 analyze
+=over 4
+
+=item * analyze
+
+=back
 
 =head1 AUTHOR
 

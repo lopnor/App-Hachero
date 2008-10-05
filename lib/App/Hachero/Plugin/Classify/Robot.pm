@@ -3,10 +3,6 @@ use strict;
 use warnings;
 use base qw(App::Hachero::Plugin::Base);
 
-sub init {
-    my ($self, $context) = @_;
-}
-
 sub classify : Hook {
     my ($self, $context, $args) = @_;
     my $ua = $context->currentlog->{ua} or return;
@@ -32,11 +28,23 @@ App::Hachero::Plugin::Classify::Robot - plugin that marks robot request
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Classify::Robot
+      config:
+        filter: 1
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
+A plugin that marks robot request. excludes robot request if you pass 1 to filter configuration.
+
+=head2 implemented hooks
+
+=over 4
     
-=head2 classify
+=item * classify
+
+=back
 
 =head1 AUTHOR
 

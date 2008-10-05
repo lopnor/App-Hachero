@@ -64,11 +64,27 @@ App::Hachero::Plugin::Input::FTP - reads logs from FTP server (somehow directly)
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Input::FTP
+      config:
+        host: ftp.example.com
+        port: 2121
+        username: your_name
+        password: your_password
+        file: /path/to/your/logfile 
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
+reads logs from FTP server (somehow directly)
 
-=head2 input 
+=head2 implemented hooks
+
+=over 4
+
+=item * input 
+
+=back
 
 =head1 AUTHOR
 

@@ -119,6 +119,28 @@ App::Hachero - a plaggable log analyzing framework
 
 =head1 DESCRIPTION
 
+Hachero is plaggable log analyzing framework. You can make your own plugin to analyze log in your way. Plagger style configuration file makes it easy to run your analyzer in different environments.
+
+=head2 configuration
+
+You can work_path and plugin_path configuration in the global section. Put your plugin in the plugin_path.
+
+  ---
+  global:
+    log:
+        level: error
+    work_path: /path/to/work_path
+    plugin_path: /path/to/plugin_path
+
+  plugins:
+    - module: Input::Stdin
+
+See L<Class::Component::Component::Plaggerize> for more informations.
+
+=head2 plugins
+
+See L<Class::Component::Plugin> and L<App::Hachero::Plugin::Base> for implementation informations.
+
 =head1 METHODS
 
 =head2 new({config => $config})
@@ -139,7 +161,7 @@ returns context object of the application.
 
 =head2 set_currentline (internal use only)
 
-cleanups $context->currentline before input new line.
+cleanups previous line and calls 'input' hook to input new line.
 
 =head2 run_hook_and_check($hook)
 

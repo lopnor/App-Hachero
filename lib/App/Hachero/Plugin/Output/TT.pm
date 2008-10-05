@@ -28,11 +28,24 @@ App::Hachero::Plugin::Output::TT - writes results via template toolkit
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Output::TT
+      config:
+        template: /path/to/your/template
+        out: /path/to/output
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
-    
-=head2 output
+writes results via template toolkit
+
+=head2 implemented hooks
+
+=over 4
+
+=item * output
+
+=back
 
 =head1 AUTHOR
 

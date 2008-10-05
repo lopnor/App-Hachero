@@ -37,11 +37,21 @@ App::Hachero::Plugin::Analyze::AccessCount - simple analyzer for App::Hachero
 
 =head1 SYNOPSYS
 
+  ---
+  plugins:
+    - module: Analyze::AccessCount
+      config:
+        truncate_to: minute
+
 =head1 DESCRIPTION
 
-=head1 IMPLEMENTED HOOKS
-    
-=head2 analyze
+=head2 implemented hooks
+
+=over 4
+
+=item * analyze
+
+=back
 
 =head1 AUTHOR
 
