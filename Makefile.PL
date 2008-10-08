@@ -25,6 +25,8 @@ requires 'Module::Collect';
 requires 'HTTP::DetectUserAgent';
 requires 'File::Find::Rule::Age';
 requires 'Template';
+requires 'DateTime';
+requires 'DateTime::TimeZone';
 
 build_requires 'Test::More';
 build_requires 'Test::Base';

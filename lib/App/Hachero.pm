@@ -2,7 +2,7 @@ package App::Hachero;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '0.01';
+our $VERSION = '0.01_01';
 use Class::Component;
 use base qw(Class::Accessor::Fast);
 use UNIVERSAL::require;
@@ -123,7 +123,7 @@ Hachero is plaggable log analyzing framework. You can make your own plugin to an
 
 =head2 configuration
 
-You can work_path and plugin_path configuration in the global section. Put your plugin in the plugin_path.
+You can set work_path and plugin_path configuration in the global section. Put your plugin in the plugin_path.
 
   ---
   global:

@@ -17,7 +17,7 @@ my $config = {
         {
             module => 'Filter::AccessTime',
             config => {
-                time_zone => 'local',
+                time_zone => 'Asia/Tokyo',
                 from => {
                     subtract => {days => 1}
                 },
@@ -33,7 +33,7 @@ my $app = App::Hachero->new({config => $config});
 run {
     my $block = shift;
     $app->currentline('1');
-    my $dt = DateTime->now( time_zone => 'local' )
+    my $dt = DateTime->now( time_zone => 'Asia/Tokyo' )
                      ->truncate( to => 'day' )
                      ->subtract(%{$block->input});
     $app->currentinfo({request => {datetime => $dt}});

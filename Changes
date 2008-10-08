@@ -1,5 +1,11 @@
 Revision history for Perl extension App::Hachero
 
+0.01_01	2008-10-08T20:35:00+0900
+
+		- fix DateTime::TimeZone error in t/plugin/filter/04_access_time (maybe)
+		- fix typos in POD
+		- add README
+
 0.01	2008-10-07T12:24:02+0900
 
 	- original version

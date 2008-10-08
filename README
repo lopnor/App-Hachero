@@ -1,0 +1,81 @@
+NAME
+    App::Hachero - a plaggable log analyzing framework
+
+SYNOPSYS
+      % hachero.pl -c config.yaml
+
+DESCRIPTION
+    Hachero is plaggable log analyzing framework. You can make your own
+    plugin to analyze log in your way. Plagger style configuration file
+    makes it easy to run your analyzer in different environments.
+
+  configuration
+    You can set work_path and plugin_path configuration in the global
+    section. Put your plugin in the plugin_path.
+
+      ---
+      global:
+        log:
+            level: error
+        work_path: /path/to/work_path
+        plugin_path: /path/to/plugin_path
+
+      plugins:
+        - module: Input::Stdin
+
+    See Class::Component::Component::Plaggerize for more informations.
+
+  plugins
+    See Class::Component::Plugin and App::Hachero::Plugin::Base for
+    implementation informations.
+
+METHODS
+  new({config => $config})
+    instanciates App::Hachero application. you can pass config in Plagger
+    style.
+
+  initialize (internal use only)
+    setups work directory.
+
+  run
+    runs the application.
+
+  context
+    returns context object of the application.
+
+  set_currentline (internal use only)
+    cleanups previous line and calls 'input' hook to input new line.
+
+  run_hook_and_check($hook)
+    runs specified hook and checks whether currentline exists. returns 1 if
+    currentline exists.
+
+  class_component_load_plugin_resolver
+    returns plugin modules in plugin_path for Class::Component.
+
+AUTHOR
+    Takaaki Mizuno <cpan@takaaki.info>
+
+    Nobuo Danjou <nobuo.danjou@gmail.com>
+
+SEE ALSO
+    Plagger
+
+    Class::Component
+
+    Class::Component::Component::Plaggerize
+
+    Class::Component::Component::DisableDynamicPlugin
+
+    App::MadEye
+
+REPOSITORY
+      svn co http://svn.coderepos.org/share/lang/perl/App-Hachero/trunk hachero
+
+    The svn repository of this module is hosted at
+    <http://coderepos.org/share/>. Patches and commits are welcome.
+
+LICENSE
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+

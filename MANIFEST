@@ -32,6 +32,7 @@ lib/App/Hachero/Result/Data.pm
 Makefile.PL
 MANIFEST			This list of files
 META.yml
+README
 t/00_compile.t
 t/app/01_plugin_path.t
 t/app/02_result.t
