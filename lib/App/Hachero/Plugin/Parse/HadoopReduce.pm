@@ -2,6 +2,7 @@ package App::Hachero::Plugin::Parse::HadoopReduce;
 use strict;
 use warnings;
 use base 'App::Hachero::Plugin::Base';
+use UNIVERSAL::require;
 
 sub parse : Hook {
     my ( $self, $context, $args ) = @_;
