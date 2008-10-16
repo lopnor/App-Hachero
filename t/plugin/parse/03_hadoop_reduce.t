@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Test::More tests => 5;
 use App::Hachero;
-use App::Hachero::Plugin::Analyze::AccessCount;
 use Digest::MD5 qw(md5_hex);
 
 BEGIN {

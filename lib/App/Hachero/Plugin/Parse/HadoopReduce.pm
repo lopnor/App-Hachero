@@ -2,13 +2,14 @@ package App::Hachero::Plugin::Parse::HadoopReduce;
 use strict;
 use warnings;
 use base 'App::Hachero::Plugin::Base';
-use App::Hachero::Result;
 
 sub parse : Hook {
     my ( $self, $context, $args ) = @_;
     my ($key, $value) = split(/\t/,$context->currentline);
     my $VAR1; # for Data::Dumper;
     eval $value;
+    (my $package = ref $VAR1) =~ s/Result\:\:/Plugin::Analyze::/;
+    $package->require;
     my ($prime, $second) = split('-',$key);
     my $result = $context->result->{$prime};
     if ($result) {
