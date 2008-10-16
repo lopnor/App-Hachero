@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use base qw(App::Hachero::Plugin::Base);
 use Data::Dumper;
+use UNIVERSAL::require;
 
 sub output_line : Hook {
     my ($self, $context) = @_;
@@ -10,10 +11,14 @@ sub output_line : Hook {
     local $Data::Dumper::Indent = 0;
     local $Data::Dumper::Terse = 0;
     for my $prime_key (keys %{$context->result}) {
-        my $result = $context->result->{$prime_key}->data;
-        for my $second_key (keys %{$result}) {
-            my $value = Dumper $result->{$second_key};
-            printf $fh "%s-%s\t%s\n", $prime_key, $second_key, $value;
+        my $result = $context->result->{$prime_key};
+        my $package = ref $result;
+        $package->require;
+        for my $second_key (keys %{$result->data}) {
+            my $data = $result->data->{$second_key};
+            my $value = $package->new;
+            $value->push($data->hashref);
+            printf $fh "%s-%s\t%s\n", $prime_key, $second_key, Dumper $value;
         }
     }
     $context->result( {} );

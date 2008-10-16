@@ -10,11 +10,12 @@ sub parse : Hook {
     my $VAR1; # for Data::Dumper;
     eval $value;
     my ($prime, $second) = split('-',$key);
-    my $record = $context->result->{$prime}->{$second};
-    if ($record) {
-        $record->count_up($VAR1->{count});
+    my $result = $context->result->{$prime};
+    if ($result) {
+        my ($value) = $VAR1->values;
+        $result->push($value->hashref);
     } else {
-        $context->result->{$prime}->{$second} = $VAR1;
+        $context->result->{$prime} = $VAR1;
     }
 }
 

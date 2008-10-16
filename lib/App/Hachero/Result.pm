@@ -17,8 +17,12 @@ sub new {
 sub push {
     my ($self, $args) = @_;
     my $key = $self->key($args);
-    $self->data->{$key} ||= App::Hachero::Result::Data->new($args);
-    $self->data->{$key}->count_up;
+    if ($self->data->{$key}) {
+        $self->data->{$key}->count_up($args->{count} || 1);
+    } else {
+        $self->data->{$key} = App::Hachero::Result::Data->new($args);
+        $self->data->{$key}->count_up unless $args->{count};
+    }
 }
 
 sub values {
