@@ -14,7 +14,7 @@ sub parse : Hook {
     $log->{ts} or return;
     my @req = split( /\s+/,$log->{req});
     my $datetime = DateTime::Format::HTTP->parse_datetime($log->{ts});
-    if (my $tz = $self->config->{config}->{time_zone}) {
+    if (my $tz = $context->conf->{global}->{time_zone}) {
         $datetime->set_time_zone($tz);
     }
     $info->{request} = {
@@ -39,10 +39,10 @@ App::Hachero::Plugin::Parse::Normalize - normalizes request informations set by 
 =head1 SYNOPSYS
 
   ---
+  global:
+    time_zone: Asia/Tokyo
   plugins:
     - module: Parse::Normalize
-      config:
-        time_zone: Asia/Tokyo
 
 =head1 DESCRIPTION
 

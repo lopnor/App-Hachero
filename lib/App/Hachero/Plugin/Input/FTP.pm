@@ -6,7 +6,7 @@ use base qw(App::Hachero::Plugin::Base);
 use File::Basename;
 use Net::FTP;
 
-sub init {
+sub initialize : Hook {
     my ($self, $context) = @_;
 
     my $config = $self->config->{config};

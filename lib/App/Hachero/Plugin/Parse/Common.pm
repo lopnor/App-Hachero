@@ -4,7 +4,7 @@ use warnings;
 use base qw(App::Hachero::Plugin::Base);
 use Regexp::Log::Common;
 
-sub init {
+sub initialize : Hook {
     my ($self, $context) = @_;
     my $regexp = Regexp::Log::Common->new(
         format => $self->config->{config}->{format} || ':extended',

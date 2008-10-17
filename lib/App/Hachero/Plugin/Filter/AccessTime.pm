@@ -4,9 +4,9 @@ use warnings;
 use base qw(App::Hachero::Plugin::Base);
 use DateTime;
 
-sub init {
+sub initialize: Hook {
     my ($self, $context) = @_;
-    my $time_zone = $self->config->{config}->{time_zone} || 'local';
+    my $time_zone = $context->conf->{global}->{time_zone} || 'local';
     my $dt = DateTime->now(time_zone => $time_zone)->truncate(to => 'day');
     for my $key ('from', 'to') {
         if ($self->config->{config}->{$key}) {
@@ -42,10 +42,11 @@ App::Hachero::Plugin::Filter::AccessTime - excludes requests in specified time
 =head1 SYNOPSYS
 
   ---
+  global:
+    - time_zone: Asia/Tokyo
   plugins:
     - module: Filter::AccessTime
       config:
-        time_zone: Asia/Tokyo
         from:
             subtract:
                 days: 1

@@ -1,3 +1,5 @@
+global:
+    time_zone : Asia/Tokyo
 plugins:
 
   - module: Input::File
@@ -13,12 +15,9 @@ plugins:
         format: :extended
 
   - module: Parse::Normalize
-    config: 
-        time_zone: Asia/Tokyo
   
   - module: Filter::AccessTime
     config:
-        timezone: Asia/Tokyo
         from:
             subtract:
                 days: 1

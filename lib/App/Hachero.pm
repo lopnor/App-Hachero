@@ -28,6 +28,7 @@ sub new {
     my $self = $class->SUPER::new($args);
     $self->result({});
     $context = $self;
+    $self->initialize;
     $self;
 }
 
@@ -68,7 +69,6 @@ sub run_hook_and_check {
 sub run {
     my $self = shift;
     $self->log(debug => sprintf ('run start: %s', scalar localtime));
-    $self->initialize;
     $self->run_hook('fetch');
     while( $self->set_currentline ){
         $self->run_hook_and_check('parse') or next;

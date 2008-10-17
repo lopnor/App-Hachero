@@ -6,10 +6,12 @@ use App::Hachero;
 plan tests => (1 * blocks);
 
 my $config = {
+    global => {
+        time_zone => 'Asia/Tokyo',
+    },
     plugins => [
         {
             module => 'Parse::Normalize',
-            config => {time_zone => 'Asia/Tokyo'},
         },
         {
             module => 'Classify::UserAgent',
