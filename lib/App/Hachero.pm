@@ -10,7 +10,13 @@ use File::Spec;
 use Module::Collect;
 
 __PACKAGE__->load_components(qw/DisableDynamicPlugin Plaggerize Autocall::InjectMethod/);
-__PACKAGE__->mk_accessors(qw/currentline currentlog currentinfo result work_path/);
+__PACKAGE__->mk_accessors(qw/
+    currentline 
+    currentlog 
+    currentinfo 
+    result 
+    work_path 
+    /);
 
 my $packages_from_plugin_path;
 my $context;
@@ -91,13 +97,14 @@ sub initialize {
     if( !-d $work_path ){
         mkdir $work_path;
     }
+    $self->run_hook('initialize');
 }
 
 sub class_component_load_plugin_resolver {
     my ($self, $package) = @_;
     $package = "App::Hachero::Plugin::$package";
     for my $pkg (@{ $packages_from_plugin_path }) {
-        return $pkg if $pkg->{package} eq $package;
+        return $pkg if $pkg->package eq $package;
     }
     return undef;
 }

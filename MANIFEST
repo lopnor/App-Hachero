@@ -36,6 +36,9 @@ README
 t/00_compile.t
 t/app/01_plugin_path.t
 t/app/02_result.t
+t/app/03_plugin_hadoop.t
+t/data/plugin/test_bar.pm
+t/data/plugin/test_baz.pm
 t/data/plugin/test_foo.pm
 t/plugin/analyze/02_accesscount.t
 t/plugin/analyze/03_useragent.t

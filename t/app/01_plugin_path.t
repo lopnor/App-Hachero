@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More tests => 3;
 use File::Spec;
 use App::Hachero;
 
@@ -14,6 +14,7 @@ my $config = {
     },
     plugins => [
         {module => 'Test::Foo'},
+        {module => 'Analyze::Bar'},
     ],
 };
 
@@ -22,3 +23,7 @@ my $app = App::Hachero->new({config => $config});
 ok $app;
 $app->run_hook('input');
 is $app->currentline, 'ok';
+$app->run_hook('analyze');
+my $result = $app->result->{Bar};
+isa_ok $result, 'App::Hachero::Plugin::Analyze::Bar::Result';
+

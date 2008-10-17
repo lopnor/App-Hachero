@@ -14,7 +14,7 @@ sub analyze : Hook {
     my $truncate = $self->config->{config}->{truncate_to} || 'hour';
     my $time = $req->{datetime}->clone->truncate(to => $truncate);
 
-    $context->result->{UserAgent} ||= App::Hachero::Result::UserAgent->new;
+    $context->result->{UserAgent} ||= App::Hachero::Plugin::Analyze::UserAgent::Result->new;
     $context->result->{UserAgent}->push(
         {
             datetime => DateTime::Format::MySQL->format_datetime($time),
@@ -24,7 +24,7 @@ sub analyze : Hook {
 }
 
 package # hide from PAUSE
-    App::Hachero::Result::UserAgent;
+    App::Hachero::Plugin::Analyze::UserAgent::Result;
 use base qw(App::Hachero::Result);
 __PACKAGE__->mk_classdata('primary' => [qw(datetime useragent)]);
 

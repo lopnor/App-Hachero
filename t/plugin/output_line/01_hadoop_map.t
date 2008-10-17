@@ -29,7 +29,7 @@ local *STDOUT;
 open STDOUT, '>', $out;
 
 my $app = App::Hachero->new({config => $config});
-my $res = App::Hachero::Result::AccessCount->new;
+my $res = App::Hachero::Plugin::Analyze::AccessCount::Result->new;
 my $dt = '2008-10-17 04:03:15';
 my $primary = 'AccessCount';
 my $secondary = md5_hex($dt);
@@ -44,7 +44,7 @@ my ($key,$value) = split(/\t/,$contents);
 is $key, "$primary-$secondary";
 my $VAR1;
 eval $value;
-isa_ok $VAR1, 'App::Hachero::Result::AccessCount';
+isa_ok $VAR1, 'App::Hachero::Plugin::Analyze::AccessCount::Result';
 my ($data) = $VAR1->values;
 isa_ok $data, 'App::Hachero::Result::Data';
 is_deeply $data->hashref, {datetime => $dt, count => 1};

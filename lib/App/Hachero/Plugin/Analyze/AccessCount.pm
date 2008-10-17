@@ -11,7 +11,7 @@ sub analyze : Hook {
     my $truncate = $self->config->{config}->{truncate_to} || 'minute';
     my $time = $req->{datetime}->clone->truncate(to => $truncate);
     my $key = $time->epoch;
-    $context->result->{AccessCount} ||= App::Hachero::Result::AccessCount->new;
+    $context->result->{AccessCount} ||= App::Hachero::Plugin::Analyze::AccessCount::Result->new;
     $context->result->{AccessCount}->push(
         {
             datetime => DateTime::Format::MySQL->format_datetime($time),
@@ -20,7 +20,7 @@ sub analyze : Hook {
 }
 
 package  # hide from PAUSE
-    App::Hachero::Result::AccessCount;
+    App::Hachero::Plugin::Analyze::AccessCount::Result;
 use base qw(App::Hachero::Result);
 __PACKAGE__->mk_classdata(primary => ['datetime']);
 

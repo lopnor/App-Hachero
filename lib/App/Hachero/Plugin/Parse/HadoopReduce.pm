@@ -9,7 +9,7 @@ sub parse : Hook {
     my ($key, $value) = split(/\t/,$context->currentline);
     my $VAR1; # for Data::Dumper;
     eval $value;
-    (my $package = ref $VAR1) =~ s/Result\:\:/Plugin::Analyze::/;
+    (my $package = ref $VAR1) =~ s/::Result//;
     $package->require;
     my ($prime, $second) = split('-',$key);
     my $result = $context->result->{$prime};
