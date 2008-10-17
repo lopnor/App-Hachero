@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Test::Base;
 use App::Hachero;
-use IO::All;
 use DateTime;
 
 plan tests => 1 * blocks;
@@ -16,7 +15,9 @@ filters {
 run {
     my $block = shift;
     for my $file (@{$block->files}) {
-        io($file->{path}) < $file->{contents};
+        open my $fh, '>', $file->{path};
+        print $fh $file->{contents};
+        close $fh;
         if ($file->{mtime}) {
             my $mtime = DateTime->now->subtract(days => $file->{mtime})->epoch;
             utime $mtime, $mtime, $file->{path};

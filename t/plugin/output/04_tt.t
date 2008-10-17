@@ -5,7 +5,6 @@ use App::Hachero;
 use App::Hachero::Result;
 use App::Hachero::Plugin::Output::TT;
 use File::Spec;
-use IO::All;
 
 plan tests => 1 * blocks;
 
@@ -42,9 +41,13 @@ run {
         }
         $app->result->{$result} = $r;
     }
-    $block->template > io $template;
+    open my $fh_tt, '>', $template;
+    print $fh_tt $block->template;
+    close $fh_tt;
     $app->run_hook('output');
-    my $output < io $out;
+    open my $fh_out, '<', $out;
+    my $output = do {local $/; <$fh_out>};
+    close $fh_out;
     is $output, $block->expected;
     unlink $template;
     unlink $out;

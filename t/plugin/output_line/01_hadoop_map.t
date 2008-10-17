@@ -6,7 +6,6 @@ use App::Hachero::Plugin::Analyze::AccessCount;
 use App::Hachero::Result;
 use URI;
 use File::Temp;
-use IO::All;
 use Digest::MD5 qw(md5_hex);
 
 BEGIN {
@@ -38,7 +37,9 @@ $app->result({$primary => $res});
 $app->run_hook('output_line');
 close STDOUT;
 
-my $contents < io $out;
+open my $fh_out, '<', $out;
+my $contents = do {local $/; <$fh_out>};
+close $fh_out;
 my ($key,$value) = split(/\t/,$contents);
 
 is $key, "$primary-$secondary";

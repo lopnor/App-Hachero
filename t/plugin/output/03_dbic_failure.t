@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Test::More;
 use File::Temp;
-use IO::All;
 
 use App::Hachero;
 
@@ -42,7 +41,9 @@ my $app = App::Hachero->new({config => $config});
     });
     $app->run_hook('output');
     close STDOUT;
-    my $log < io $file;
+    open my $fh, '<', $file;
+    my $log = do {local $/; <$fh>};
+    close $fh;
 #    diag $log;
     like $log, qr/App::Hachero::Plugin::Output::DBIC \[error\]/;
     ok 1;

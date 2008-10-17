@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use Test::More tests => 3;
 use App::Hachero;
-use IO::All;
 
 BEGIN {
     use_ok('App::Hachero::Plugin::Input::File');
@@ -29,7 +28,10 @@ my @expected = qw(
     def
 );
 for (@expected) {
-    $_ > io(File::Spec->catfile($app->work_path,$_));
+    my $out = File::Spec->catfile($app->work_path,$_);
+    open my $fh, '>', $out;
+    print $fh $_;
+    close $fh;
 }
 
 my @result;

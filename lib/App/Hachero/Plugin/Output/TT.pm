@@ -3,16 +3,19 @@ use strict;
 use warnings;
 use base qw(App::Hachero::Plugin::Base);
 use Template;
-use IO::All;
 
 sub output : Hook {
     my ($self, $context, $args) = @_;
     my $tt_file = $self->config->{config}->{template};
     my $out_file = $self->config->{config}->{out};
     my $tt = Template->new;
-    my $template < io $tt_file;
+    open my $fh_in, '<', $tt_file;
+    my $template = do {local $/; <$fh_in>};
+    close $fh_in;
     $tt->process(\$template, $context, \my $out);
-    $out > io $out_file;
+    open my $fh_out, '>', $out_file;
+    print $fh_out $out;
+    close $fh_out;
 }
 
 1;
