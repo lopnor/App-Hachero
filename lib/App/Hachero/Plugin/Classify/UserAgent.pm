@@ -20,8 +20,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Classify::UserAgent - sets useragent information for the request

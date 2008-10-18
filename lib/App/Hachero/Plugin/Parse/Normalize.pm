@@ -30,8 +30,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Parse::Normalize - normalizes request informations set by Parse::Common

@@ -65,8 +65,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Input::File - reads logs from specified direcotry

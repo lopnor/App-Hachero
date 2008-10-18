@@ -33,8 +33,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Analyze::UserAgent - simple analyzer for App::Hachero

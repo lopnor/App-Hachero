@@ -56,8 +56,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Input::FTP - reads logs from FTP server (somehow directly)

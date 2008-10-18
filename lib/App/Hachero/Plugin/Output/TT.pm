@@ -23,8 +23,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Output::TT - writes results via template toolkit

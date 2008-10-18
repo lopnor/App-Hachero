@@ -37,8 +37,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Fetch::FTP - fetchs logs from FTP server

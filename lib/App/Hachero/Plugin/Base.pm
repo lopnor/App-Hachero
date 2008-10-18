@@ -14,8 +14,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Base - base class of plugin for App::Hachero
@@ -58,6 +56,11 @@ $app is not application instance but classname "App::Hachero" string.
 =head2 available hooks
 
 =over 4
+
+=item * initialize
+
+called once after the application is instancieated.
+you can access to $context->conf->{global} and setup your plugins.
 
 =item * fetch
 

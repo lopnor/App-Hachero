@@ -26,8 +26,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Parse::HadoopReduce - parses line from A::H::P::OutputLine::HadoopMap

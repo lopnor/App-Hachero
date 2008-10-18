@@ -33,8 +33,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Result::Data - a class to store analyzed data of Hachero

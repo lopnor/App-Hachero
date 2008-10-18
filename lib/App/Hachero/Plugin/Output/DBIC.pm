@@ -45,8 +45,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Output::DBIC - writes results to databases via DBIx::Class

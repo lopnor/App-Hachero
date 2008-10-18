@@ -25,8 +25,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Parse::Common - parses common apache logs

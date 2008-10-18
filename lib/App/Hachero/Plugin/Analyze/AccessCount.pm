@@ -29,8 +29,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Analyze::AccessCount - simple analyzer for App::Hachero

@@ -20,8 +20,6 @@ __END__
 
 =pod
 
-=encoding utf8
-
 =head1 NAME
 
 App::Hachero::Plugin::Classify::Robot - plugin that marks robot request
