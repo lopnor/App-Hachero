@@ -12,12 +12,14 @@ filters {
 };
 
 my $config = {
-    global => {log => {level => 'error'}},
+    global => {
+        log => {level => 'error'},
+        time_zone => 'Asia/Tokyo',
+    },
     plugins => [
         {
             module => 'Filter::AccessTime',
             config => {
-                time_zone => 'Asia/Tokyo',
                 from => {
                     subtract => {days => 1}
                 },
