@@ -10,7 +10,6 @@ sub analyze : Hook {
     my $req = $context->currentinfo->{request} or return;
     my $truncate = $self->config->{config}->{truncate_to} || 'minute';
     my $time = $req->{datetime}->clone->truncate(to => $truncate);
-    my $key = $time->epoch;
     $context->result->{AccessCount} ||= App::Hachero::Plugin::Analyze::AccessCount::Result->new;
     $context->result->{AccessCount}->push(
         {
