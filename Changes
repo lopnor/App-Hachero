@@ -1,9 +1,15 @@
 Revision history for Perl extension App::Hachero
 
+0.02	2008-10-19T14:56:35+0900
+
+	- requires plugins in plugin_path on HadoopReduce
+
 0.01_03	2008-10-18T16:46:05+0900
+
 	- implemented initialize hook
 
 0.01_02 2008-10-17T15:23:35+0900
+
 	- fix dump/eval errors on HadoopMap/HadoopReduce
 
 0.01_01	2008-10-08T20:35:00+0900
