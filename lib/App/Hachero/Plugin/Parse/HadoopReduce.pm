@@ -9,8 +9,17 @@ sub parse : Hook {
     my ($key, $value) = split(/\t/,$context->currentline);
     my $VAR1; # for Data::Dumper;
     eval $value;
-    (my $package = ref $VAR1) =~ s/::Result//;
-    $package->require;
+    my $package = ref $VAR1;
+    $self->{required} ||= [];
+    unless (grep {$_ eq $package} @{$self->{required}}) {
+        if (my $pkg = $context->class_component_load_plugin_resolver($package)) {
+            $pkg->require;
+        } else { 
+            $package =~ s/::([^:]+?)$//;
+            $package->require;
+        }
+        push @{$self->{required}}, $package;
+    }
     my ($prime, $second) = split('-',$key);
     my $result = $context->result->{$prime};
     if ($result) {

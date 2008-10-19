@@ -13,7 +13,7 @@ sub output : Hook {
     }
     for my $key (keys %{$context->result}) {
         (my $table = $key) =~ s/\:\://g;
-        my $rs = eval {$schema->resultset($table)};
+        my $rs = eval {$schema->resultset(ucfirst $table)};
         if ($@) {
             $context->log(error => $!);
             next;

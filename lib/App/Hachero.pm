@@ -102,7 +102,9 @@ sub initialize {
 
 sub class_component_load_plugin_resolver {
     my ($self, $package) = @_;
-    $package = "App::Hachero::Plugin::$package";
+    if ( $package !~ m{App::Hachero::Plugin::} ) {
+        $package = "App::Hachero::Plugin::$package";
+    }
     for my $pkg (@{ $packages_from_plugin_path }) {
         return $pkg if $pkg->package eq $package;
     }
