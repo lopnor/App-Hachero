@@ -7,6 +7,7 @@ sub output : Hook {
     my ($self, $context, $args) = @_;
     my $schema = App::Hachero::Plugin::Output::DBIC::Schema
         ->connect(@{$self->config->{config}->{connect_info}});
+    my $update_mode = $self->config->{config}->{update_mode};
     unless ($schema) {
         $context->log(error => "connection error");
         return;
@@ -22,7 +23,14 @@ sub output : Hook {
             my $result = $context->result->{$key};
             for my $data ($result->values) {
                 eval {
-                    $rs->update_or_create($data->hashref)
+                    my $hashref = $data->hashref;
+                    if ( $update_mode eq 'count_up' ) {
+                        my $count = delete $hashref->{count};
+                        my $rec = $rs->find_or_create($hashref);
+                        $rec->update({count => ($rec->count || 0) + $count});
+                    } else {
+                        $rs->update_or_create($hashref)
+                    }
                 };
                 if ($@) {
                     $context->log(error => $!);
@@ -55,10 +63,12 @@ App::Hachero::Plugin::Output::DBIC - writes results to databases via DBIx::Class
   plugins:
     - module: Output::DBIC
       config:
+        update_mode: [count_up|overwrite]
         connect_info:
             - dbi:mysql:dbhost=db.local;dbname=logdb
             - your_name
             - your_password
+        
 
 =head1 DESCRIPTION
 
