@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 5;
+use Test::More tests => 6;
 use App::Hachero;
 use Digest::MD5 qw(md5_hex);
 
@@ -31,4 +31,9 @@ my $secondary = md5_hex($dt);
     my ($data) = $app->result->{AccessCount}->values;
     isa_ok $data, 'App::Hachero::Result::Data';
     is_deeply $data->hashref, {datetime => $dt, count => 10};
+}
+{
+    $app->currentline('hogehogefugaga');
+    $app->run_hook('parse');
+    is $app->currentline, '';
 }

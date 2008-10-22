@@ -8,8 +8,15 @@ sub parse : Hook {
     my ( $self, $context, $args ) = @_;
     my ($key, $value) = split(/\t/,$context->currentline);
     my $VAR1; # for Data::Dumper;
-    eval $value;
+    {
+        no warnings;
+        eval $value;
+    }
     my $package = ref $VAR1;
+    unless ($package) {
+        $context->currentline('');
+        return;
+    }
     $self->{required} ||= [];
     unless (grep {$_ eq $package} @{$self->{required}}) {
         if (my $pkg = $context->class_component_load_plugin_resolver($package)) {
