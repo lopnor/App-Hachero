@@ -53,6 +53,7 @@ t/plugin/input/02_ftp.t
 t/plugin/input/03_file.t
 t/plugin/input/04_file_rule.t
 t/plugin/output/01_dbic.t
+t/plugin/output/02_dbic_countup.t
 t/plugin/output/03_dbic_failure.t
 t/plugin/output/04_tt.t
 t/plugin/output_line/01_hadoop_map.t

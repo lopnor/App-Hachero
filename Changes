@@ -1,5 +1,10 @@
 Revision history for Perl extension App::Hachero
 
+0.03	2008-10-22T12:27:15+0900
+
+	- added count_up mode in Output::DBIC
+	- skips line when parsing error happens in Parse::HadoopReduce
+
 0.02	2008-10-19T14:56:35+0900
 
 	- requires plugins in plugin_path on HadoopReduce
