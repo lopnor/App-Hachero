@@ -2,7 +2,7 @@ package App::Hachero;
 use strict;
 use warnings;
 use 5.00800;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 use Class::Component;
 use base qw(Class::Accessor::Fast);
 use UNIVERSAL::require;
@@ -50,6 +50,7 @@ sub _setup_plugins_static {
             path => $path,
             pattern => '*.pm',
             prefix => 'App::Hachero::Plugin',
+            multiple => 1,
         );
         $packages_from_plugin_path = $collect->modules;
     }

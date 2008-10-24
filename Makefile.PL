@@ -22,7 +22,7 @@ requires 'File::Spec';
 requires 'File::Temp';
 requires 'File::stat';
 requires 'HTTP::DetectUserAgent';
-requires 'Module::Collect';
+requires 'Module::Collect' => '0.05';
 requires 'Net::FTP';
 requires 'Regexp::Log::Common';
 requires 'Regexp::Wildcards';
