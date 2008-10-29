@@ -7,7 +7,7 @@ sub output : Hook {
     my ($self, $context, $args) = @_;
     my $schema = App::Hachero::Plugin::Output::DBIC::Schema
         ->connect(@{$self->config->{config}->{connect_info}});
-    my $update_mode = $self->config->{config}->{update_mode};
+    my $update_mode = $self->config->{config}->{update_mode} || 'update';
     unless ($schema) {
         $context->log(error => "connection error");
         return;
