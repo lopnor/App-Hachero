@@ -1,5 +1,9 @@
 Revision history for Perl extension App::Hachero
 
+0.05	2008-11-02T11:36:30+0900
+
+	- set default value 'overwrite' for update_mode of Output::DBIC
+
 0.04	2008-10-24T19:09:00+0900
 
 	- multiple package in one plugin file support with Module::Collect 0.05. yappo++
