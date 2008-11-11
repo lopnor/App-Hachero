@@ -28,6 +28,7 @@ sub parse : Hook {
         push @{$self->{required}}, $package;
     }
     my ($prime, $second) = split('-',$key);
+    $context->currentinfo->{hadoop_reduce}->{$prime} = $VAR1;
     my $result = $context->result->{$prime};
     if ($result) {
         my ($value) = $VAR1->values;
