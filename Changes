@@ -1,6 +1,6 @@
 Revision history for Perl extension App::Hachero
 
-0.06    2009-04-05T23:18:10+0900
+0.06_01 2009-04-06T04:42:10+0900
 
     - less dependency using Module::AutoInstall
     - new Output::CSV plugin
