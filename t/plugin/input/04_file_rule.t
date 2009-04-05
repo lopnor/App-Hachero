@@ -4,7 +4,14 @@ use Test::Base;
 use App::Hachero;
 use DateTime;
 
-plan tests => 1 * blocks;
+BEGIN {
+    eval {require 'File::Find::Rule'; require 'File::Find::Rule::Age';};
+    if ($@) {
+        plan skip_all => 'File::Find::Rule or File::Find::Rule::Age not found. So skip this test';
+    } else {
+        plan tests => 1 * blocks;
+    }
+}
 
 filters {
     config => [qw(yaml)],

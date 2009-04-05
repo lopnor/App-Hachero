@@ -3,13 +3,18 @@ use warnings;
 use Test::Base;
 use App::Hachero;
 use App::Hachero::Result;
-use App::Hachero::Plugin::Output::DBIC;
 
-if ($ENV{TEST_HACHERO_DBIC}) {
-    plan tests => (5 * blocks) + 1;
-} else {
-    plan skip_all => 'set "TEST_HACHERO_DBIC" to run this test.';
-    exit 0;
+BEGIN {
+    eval {require 'DBIx::Class::Schema::Loader'};
+    if ($@) {
+        plan skip_all => 'DBIx::Class::Schema::Loader not found. So skip this test';
+    } elsif ($ENV{TEST_HACHERO_DBIC}) {
+        plan tests => (5 * blocks) + 2;
+        use_ok 'App::Hachero::Plugin::Output::DBIC';
+    } else {
+        plan skip_all => 'set "TEST_HACHERO_DBIC" to run this test.';
+        exit 0;
+    }
 }
 
 my $config = {

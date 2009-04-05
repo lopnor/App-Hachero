@@ -4,12 +4,14 @@ use Test::More;
 use App::Hachero;
 
 BEGIN {
-    if ($ENV{HACHERO_TEST_FTP}) {
+    eval {require 'Net::FTP'};
+    if ($!) {
+        plan skip_all => 'Net::FTP not available so skip this';
+    } elsif ($ENV{HACHERO_TEST_FTP}) {
         plan tests => 2;
         use_ok('App::Hachero::Plugin::Input::FTP');
     } else {
         plan skip_all => 'set "TEST_HACHERO_FTP" to run this test.';
-        exit 0;
     }
 }
 

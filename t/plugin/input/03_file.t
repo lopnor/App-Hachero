@@ -1,10 +1,16 @@
 use strict;
 use warnings;
-use Test::More tests => 3;
+use Test::More;
 use App::Hachero;
 
 BEGIN {
-    use_ok('App::Hachero::Plugin::Input::File');
+    eval {require 'File::Find::Rule'; require 'File::Find::Rule::Age';};
+    if ($@) {
+        plan skip_all => 'File::Find::Rule or File::Find::Rule::Age not found. So skip this test';
+    } else {
+        plan tests => 3;
+        use_ok('App::Hachero::Plugin::Input::File');
+    }
 }
 
 my $config = {

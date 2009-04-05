@@ -7,7 +7,7 @@ use YAML;
 sub output : Hook {
     my ($self, $context, $args) = @_;
     my $fh = \*STDOUT;
-    print $fh $context->result;
+    print $fh Dump $context->result;
 }
 
 1;

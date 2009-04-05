@@ -3,10 +3,17 @@ use warnings;
 use Test::Base;
 use App::Hachero;
 use App::Hachero::Result;
-use App::Hachero::Plugin::Output::TT;
 use File::Spec;
 
-plan tests => 1 * blocks;
+BEGIN {
+    eval {require 'Template'};
+    if ($!) {
+        plan skip_all => 'Template not available so skip this test';
+    } else {
+        plan tests => 1 * blocks;
+        use App::Hachero::Plugin::Output::TT;
+    }
+}
 
 filters {
     config => [qw(yaml)],

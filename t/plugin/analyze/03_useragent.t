@@ -3,7 +3,14 @@ use warnings;
 use Test::Base;
 use App::Hachero;
 
-plan tests => (1 * blocks);
+BEGIN {
+    eval { require 'HTTP::DetectUserAgent' };
+    if ($!) {
+        plan skip_all => 'HTTP::DetectUserAgent not available so skip this test';
+    } else {
+        plan tests =>  (1 * blocks);
+    }
+}
 
 my $config = {
     global => {

@@ -6,12 +6,14 @@ use File::Temp;
 use App::Hachero;
 
 BEGIN {
-    if ($ENV{TEST_HACHERO_DBIC}) {
+    eval {require 'DBIx::Class::Schema::Loader'};
+    if ($@) {
+        plan skip_all => 'DBIx::Class::Schema::Loader not found. So skip this test';
+    } elsif ($ENV{TEST_HACHERO_DBIC}) {
         plan tests => 3;
         use_ok('App::Hachero::Plugin::Output::DBIC');
     } else {
         plan skip_all => 'set "TEST_HACHERO_DBIC" to run this test.';
-        exit 0;
     }
 }
 
