@@ -6,7 +6,7 @@ use App::Hachero;
 BEGIN {
     eval { require 'HTTP::DetectUserAgent' };
     if ($!) {
-        plan skip_all => 'HTTP::DetectUserAgent not available so skip this test';
+        plan skip_all => 'no HTTP::DetectUserAgent found';
     } else {
         plan tests =>  (1 * blocks);
     }

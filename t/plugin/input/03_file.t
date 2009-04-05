@@ -6,7 +6,7 @@ use App::Hachero;
 BEGIN {
     eval {require 'File::Find::Rule'; require 'File::Find::Rule::Age';};
     if ($@) {
-        plan skip_all => 'File::Find::Rule or File::Find::Rule::Age not found. So skip this test';
+        plan skip_all => 'File::Find::Rule or File::Find::Rule::Age not found';
     } else {
         plan tests => 3;
         use_ok('App::Hachero::Plugin::Input::File');

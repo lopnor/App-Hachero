@@ -6,7 +6,7 @@ use App::Hachero;
 BEGIN {
     eval {require 'Net::FTP'};
     if ($!) {
-        plan skip_all => 'Net::FTP not available so skip this';
+        plan skip_all => 'no Net::FTP found';
     } elsif ($ENV{HACHERO_TEST_FTP}) {
         plan tests => 2;
         use_ok('App::Hachero::Plugin::Input::FTP');

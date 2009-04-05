@@ -7,11 +7,11 @@ use File::Spec;
 
 BEGIN {
     eval {require 'Template'};
-    if ($!) {
-        plan skip_all => 'Template not available so skip this test';
+    if ($@) {
+        plan skip_all => 'no Template found';
     } else {
-        plan tests => 1 * blocks;
-        use App::Hachero::Plugin::Output::TT;
+        plan tests => (1 * blocks) + 1;
+        use_ok 'App::Hachero::Plugin::Output::TT';
     }
 }
 

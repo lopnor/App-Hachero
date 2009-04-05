@@ -1,5 +1,9 @@
 Revision history for Perl extension App::Hachero
 
+0.06_02 2009-04-06T08:29:15+0900
+
+    - fix broken tests
+
 0.06_01 2009-04-06T04:42:10+0900
 
     - less dependency using Module::AutoInstall

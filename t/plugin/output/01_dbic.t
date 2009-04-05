@@ -7,7 +7,7 @@ use App::Hachero::Result;
 BEGIN {
     eval {require 'DBIx::Class::Schema::Loader'};
     if ($@) {
-        plan skip_all => 'DBIx::Class::Schema::Loader not found. So skip this test';
+        plan skip_all => 'no DBIx::Class::Schema::Loader found';
     } elsif ($ENV{TEST_HACHERO_DBIC}) {
         plan tests => (5 * blocks) + 2;
         use_ok 'App::Hachero::Plugin::Output::DBIC';
