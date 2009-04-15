@@ -8,7 +8,6 @@ sub output : Hook {
     my ($self, $context, $args) = @_;
     my $fh = \*STDOUT;
     my $csv = Text::CSV_XS->new($self->config->{config}->{csv} || {binary => 1, eol => "\n"});
-            use Data::Dumper;
     for my $output (@{$self->config->{config}->{output}}) {
         my ($key, $fields);
         if (ref $output eq 'HASH') {
