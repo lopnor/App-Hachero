@@ -17,6 +17,7 @@ sub _fetch {
         $self->{filesize} = stat($file)->size;
     }
     open my $fh, '<', $file or die;
+    $self->{filename} = $file;
     $self->{fh} = $fh;
 }
 
@@ -58,6 +59,7 @@ sub input : Hook {
         }
     }
     $context->currentline( $line );
+    $context->currentinfo->{filename} = $self->{filename} if $line;
 }
 
 1;
