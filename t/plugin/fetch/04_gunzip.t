@@ -7,8 +7,8 @@ use File::Temp;
 use File::Spec::Functions;
 
 my $work_path = File::Temp::tempdir(CLEANUP => 1, DIR => 't');
-my $gzfile = catfile(qw( t data test.gz ));
-system('cp', $gzfile, $work_path);
+my $gzfile = catfile(qw( t data test.gzip ));
+system('cp', $gzfile, catfile($work_path, 'test.gz'));
 
 my $config = {
     plugins => [

@@ -1,5 +1,11 @@
 Revision history for Perl extension App::Hachero
 
+0.07_01 2009-07-15T17:51:00+0900
+
+    - new Fetch::S3 plugin
+    - new Fetch::Gunzip plugin
+    - fix bugs on tests
+
 0.06    2009-04-15T09:11:26+0900
 
     - removed debug codes

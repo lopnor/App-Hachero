@@ -10,6 +10,7 @@ inc/Module/Install/Fetch.pm
 inc/Module/Install/Include.pm
 inc/Module/Install/Makefile.pm
 inc/Module/Install/Metadata.pm
+inc/Module/Install/Scripts.pm
 inc/Module/Install/TestBase.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
@@ -26,6 +27,8 @@ lib/App/Hachero/Plugin/Base.pm
 lib/App/Hachero/Plugin/Classify/Robot.pm
 lib/App/Hachero/Plugin/Classify/UserAgent.pm
 lib/App/Hachero/Plugin/Fetch/FTP.pm
+lib/App/Hachero/Plugin/Fetch/Gunzip.pm
+lib/App/Hachero/Plugin/Fetch/S3.pm
 lib/App/Hachero/Plugin/Filter/AccessTime.pm
 lib/App/Hachero/Plugin/Input/File.pm
 lib/App/Hachero/Plugin/Input/FTP.pm
@@ -51,6 +54,7 @@ t/app/03_plugin_hadoop.t
 t/data/plugin/test_bar.pm
 t/data/plugin/test_baz.pm
 t/data/plugin/test_foo.pm
+t/data/test.gzip
 t/plugin/analyze/02_accesscount.t
 t/plugin/analyze/03_useragent.t
 t/plugin/classify/01_robot.t
@@ -58,6 +62,8 @@ t/plugin/classify/02_robot_filter.t
 t/plugin/classify/03_useragent.t
 t/plugin/fetch/01_ftp.t
 t/plugin/fetch/02_ftp_multi.t
+t/plugin/fetch/03_s3.t
+t/plugin/fetch/04_gunzip.t
 t/plugin/filter/04_access_time.t
 t/plugin/input/01_stdin.t
 t/plugin/input/02_ftp.t
