@@ -4,13 +4,13 @@ use Test::Base;
 use App::Hachero;
 
 BEGIN {
-    eval { require 'HTTP::DetectUserAgent' };
-    if ($!) {
+    eval { require HTTP::DetectUserAgent };
+    if ($@) {
         plan skip_all => 'no HTTP::DetectUserAgent found';
-    } else {
-        plan tests =>  (1 * blocks);
     }
 }
+
+plan tests =>  (1 * blocks);
 
 my $config = {
     global => {
@@ -48,9 +48,9 @@ run {
     my $res = $app->result->{UserAgent};
     my $value = (values %{$app->result->{UserAgent}->data})[0];
     is_deeply $value, $block->expected;
-}
+};
 
-__END__
+__DATA__
 === test1
 --- input
 authuser: -

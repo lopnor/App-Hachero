@@ -4,7 +4,7 @@ use Test::More;
 use App::Hachero;
 
 BEGIN {
-    eval {require 'File::Find::Rule'; require 'File::Find::Rule::Age';};
+    eval {require File::Find::Rule; require File::Find::Rule::Age;};
     if ($@) {
         plan skip_all => 'File::Find::Rule or File::Find::Rule::Age not found';
     } else {
@@ -42,7 +42,7 @@ for (@expected) {
 
 my @result;
 for (@expected) {
-    $app->run_hook('input');
+    $app->set_currentline;
     push @result, $app->currentline;
 }
 is_deeply [sort @result], \@expected;

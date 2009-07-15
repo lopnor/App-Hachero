@@ -38,3 +38,47 @@ sub fetch : Hook {
 }
 
 1;
+__END__
+
+=pod
+
+=head1 NAME
+
+App::Hachero::Plugin::Fetch::S3 - fetchs logs from S3
+
+=head1 SYNOPSIS
+
+  ---
+  global:
+    work_path: /path/to/your/work_path
+  plugins:
+    - module: Fetch::S3
+      config:
+        aws_access_key_id: my_aws_access_key_id
+        aws_secret_access_key: my_aws_secret_access_key
+        bucket: my_bucket
+        prefix: access_log
+
+=head1 DESCRIPTION
+
+fetchs logs from S3.
+
+=head2 implemented hooks
+
+=over 4
+
+=item * fetch
+
+=back
+
+=head1 AUTHOR
+
+Nobuo Danjou <nobuo.danjou@gmail.com>
+
+=head1 SEE ALSO
+
+L<App::Hachero>
+
+L<Net::Amazon::S3>
+
+=cut

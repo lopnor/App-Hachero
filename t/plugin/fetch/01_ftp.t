@@ -5,8 +5,8 @@ use App::Hachero;
 use File::Spec;
 
 BEGIN {
-    eval {require 'Net::FTP'};
-    if ($!) {
+    eval {require Net::FTP};
+    if ($@) {
         plan skip_all => 'no Net::FTP found';
     } elsif ($ENV{HACHERO_TEST_FTP}) {
         plan tests => 2;

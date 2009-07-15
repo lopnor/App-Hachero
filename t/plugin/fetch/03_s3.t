@@ -7,7 +7,7 @@ use File::Temp;
 use File::Basename;
 
 BEGIN {
-    eval {require 'Net::Amazon::S3'};
+    eval {require Net::Amazon::S3};
     if ($@) {
         plan skip_all => 'no Net::Amazon::S3 found';
     } else {

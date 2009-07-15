@@ -28,3 +28,42 @@ sub fetch : Hook {
 }
 
 1;
+__END__
+
+=pod
+
+=head1 NAME
+
+App::Hachero::Plugin::Fetch::Gunzip - gunzips '*.gz' files in work_path
+
+=head1 SYNOPSIS
+
+  ---
+  global:
+    work_path: /path/to/your/work_path
+  plugins:
+    - module: Fetch::Gunzip
+
+=head1 DESCRIPTION
+
+Gunzips '*.gz' files in work_path.
+
+=head2 implemented hooks
+
+=over 4
+
+=item * fetch
+
+=back
+
+=head1 AUTHOR
+
+Nobuo Danjou <nobuo.danjou@gmail.com>
+
+=head1 SEE ALSO
+
+L<App::Hachero>
+
+L<Net::Amazon::S3>
+
+=cut

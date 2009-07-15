@@ -6,14 +6,14 @@ use App::Hachero::Result;
 use File::Spec;
 
 BEGIN {
-    eval {require 'Template'};
+    eval {require Template};
     if ($@) {
         plan skip_all => 'no Template found';
-    } else {
-        plan tests => (1 * blocks) + 1;
-        use_ok 'App::Hachero::Plugin::Output::TT';
     }
 }
+
+plan tests => (1 * blocks) + 1;
+use_ok 'App::Hachero::Plugin::Output::TT';
 
 filters {
     config => [qw(yaml)],

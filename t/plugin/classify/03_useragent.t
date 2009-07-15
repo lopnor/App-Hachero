@@ -4,13 +4,13 @@ use Test::Base;
 use App::Hachero;
 
 BEGIN {
-    eval { require 'HTTP::DetectUserAgent' };
-    if ($!) {
+    eval { require HTTP::DetectUserAgent };
+    if ($@) {
         plan skip_all => 'no HTTP::DetectUserAgent found';
-    } else {
-        plan tests =>  (1 * blocks);
     }
 }
+
+plan tests =>  (1 * blocks);
 
 my $config = {
     plugins => [
