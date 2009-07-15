@@ -40,6 +40,14 @@ feature 'Plugin::Fetch::FTP',
     'Net::FTP',
     'Regexp::Wildcards';
 
+feature 'Plugin::Fetch::S3',
+    -default => 0,
+    'Net::Amazon::S3';
+
+feature 'Plugin::Fetch::Gunzip',
+    -default => 0,
+    'IO::Uncompress::Gunzip';
+
 feature 'Plugin::Classify::UserAgent',
     -default => 0,
     'HTTP::DetectUserAgent';

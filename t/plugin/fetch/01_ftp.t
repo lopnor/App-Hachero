@@ -12,7 +12,7 @@ BEGIN {
         plan tests => 2;
         use_ok('App::Hachero::Plugin::Fetch::FTP');
     } else {
-        plan skip_all => 'set "TEST_HACHERO_FTP" to run this test.';
+        plan skip_all => 'set "HACHERO_TEST_FTP" to run this test.';
     }
 }
 
