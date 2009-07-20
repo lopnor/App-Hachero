@@ -4,6 +4,7 @@ use Test::Base;
 use App::Hachero;
 use App::Hachero::Result;
 use File::Spec;
+use File::Temp;
 
 BEGIN {
     eval {require Template};
@@ -16,21 +17,26 @@ plan tests => (1 * blocks) + 1;
 use_ok 'App::Hachero::Plugin::Output::TT';
 
 filters {
-    config => [qw(yaml)],
     result => [qw(yaml)],
     template => [qw(chomp)],
 };
 
-my $template = File::Spec->catfile(qw(t work template.tt));
-my $out = File::Spec->catfile(qw(t work tt.out));
+my $template = File::Temp->new(
+    SUFFIX => '.tt',
+);
+close $template;
+my $out = File::Temp->new(
+    SUFFIX => '.out',
+);
+close $out;
 
 my $config = {
     plugins => [
         {
             module => 'Output::TT',
             config => {
-                template => $template,
-                out => $out,
+                template => $template->filename,
+                out => $out->filename,
             }
         },
     ],
@@ -48,7 +54,7 @@ run {
         }
         $app->result->{$result} = $r;
     }
-    open my $fh_tt, '>', $template;
+    open my $fh_tt, '>', $template or die;
     print $fh_tt $block->template;
     close $fh_tt;
     $app->run_hook('output');
@@ -62,12 +68,6 @@ run {
 
 __END__
 ===
---- config
-plugins:
-    - module: Output::TT
-      config:
-        template: t/work/template.tt
-        out: t/work/tt.out
 --- result
 Hoge:
     - key: hooo
