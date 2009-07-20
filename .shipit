@@ -1,3 +1,2 @@
-steps = CommitMessageWrap, FindVersion, ChangeVersion, CheckChangeLog, DistTest, Commit, Tag, MakeDist, UploadCPAN
-svn.tagpattern = release-%v
-commit_message.format = lang/perl/App-Hachero: %msg
+steps = FindVersion, ChangeVersion, CheckChangeLog, DistTest, Commit, Tag, MakeDist, UploadCPAN
+git.push_to = github

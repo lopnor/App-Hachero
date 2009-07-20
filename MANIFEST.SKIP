@@ -16,3 +16,5 @@
 \.svn/
 ^\.shipit$
 \.sw[po]$
+^\.gitignore$
+\.git/
