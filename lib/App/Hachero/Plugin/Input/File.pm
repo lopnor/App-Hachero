@@ -45,7 +45,7 @@ sub input : Hook {
         my $fh = $self->{fh} || $self->_fetch($context) or return;
         $line = <$fh>;
         if ($context->conf->{global}->{log}->{level} eq 'debug') {
-            $self->{readsize}+= do {use bytes; length $line} if $line;
+            $self->{readsize}+= length $line if $line;
             print STDERR "\rreading file: $self->{readsize}/$self->{filesize}";
         }
         if ($line) {
