@@ -8,14 +8,12 @@ sub output : Hook {
     my ($self, $context, $args) = @_;
     my $tt_file = $self->config->{config}->{template};
     my $out_file = $self->config->{config}->{out};
-    my $tt = Template->new;
-    open my $fh_in, '<', $tt_file;
-    my $template = do {local $/; <$fh_in>};
-    close $fh_in;
-    $tt->process(\$template, $context, \my $out);
-    open my $fh_out, '>', $out_file;
-    print $fh_out $out;
-    close $fh_out;
+    my $tt = Template->new(
+        ABSOLUTE => 1,
+        ENCODING => 'utf8',
+    ) or die $Template::ERROR;
+    my $ok = $tt->process($tt_file, $context, $out_file, {binmode => ':utf8'});
+    $ok or die $tt->error;
 }
 
 1;
