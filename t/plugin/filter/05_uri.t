@@ -115,3 +115,25 @@ http://www.yahoo.com/some/path?ref=rss
 http://www.yahoo.com/some/path?ref=rss&foo=bar&hoge=fuga
 --- expected
 
+===
+--- config
+- exclude: all
+- include:
+    path: /some/path
+- exclude:
+    fragment: foobar
+--- request
+http://www.yahoo.com/some/path#foobar
+--- expected
+
+===
+--- config
+- exclude: all
+- include:
+    path: /some/path
+- exclude:
+    fragment: foobar
+--- request
+http://www.yahoo.com/some/path#foobarbaz
+--- expected
+1

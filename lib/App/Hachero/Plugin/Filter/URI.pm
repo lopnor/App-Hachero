@@ -11,11 +11,11 @@ sub filter :Hook {
     my $include = 0;
     for my $set (@$config) {
         my ($type, $value) = each %$set;
+        my $match = 1;
         if (ref $value eq 'HASH') {
             my ($meth, $rule) = each %$value;
             my @r = $req->$meth;
             my $result = scalar @r == 1 ? $r[0] : {@r};
-            my $match = 1;
             if (ref $rule eq 'Regexp') {
                 $match = ($result =~ $rule);
             } elsif (ref $rule eq 'HASH') {
@@ -28,10 +28,8 @@ sub filter :Hook {
             } else {
                 $match = ($result eq $rule);
             }
-            if ($match) {
-                $include = $type eq 'include' ? 1 : 0;
-            }
-        } else { # [exclude|include]: all
+        } # else => [include|exclude]: all
+        if ($match) {
             $include = $type eq 'include' ? 1 : 0;
         }
     }
