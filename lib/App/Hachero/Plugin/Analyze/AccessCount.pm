@@ -3,15 +3,15 @@ use strict;
 use warnings;
 use base qw(App::Hachero::Plugin::Base);
 use DateTime::Format::MySQL;
-use Digest::MD5;
 
 sub analyze : Hook {
     my ($self, $context, $args) = @_;
     my $req = $context->currentinfo->{request} or return;
+    my $result_key = $self->config->{config}->{result_key} || 'AccessCount';
     my $truncate = $self->config->{config}->{truncate_to} || 'minute';
     my $time = $req->{datetime}->clone->truncate(to => $truncate);
-    $context->result->{AccessCount} ||= App::Hachero::Plugin::Analyze::AccessCount::Result->new;
-    $context->result->{AccessCount}->push(
+    $context->result->{$result_key} ||= App::Hachero::Plugin::Analyze::AccessCount::Result->new;
+    $context->result->{$result_key}->push(
         {
             datetime => DateTime::Format::MySQL->format_datetime($time),
         }

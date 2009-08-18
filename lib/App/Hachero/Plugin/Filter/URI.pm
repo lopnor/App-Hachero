@@ -2,7 +2,7 @@ package App::Hachero::Plugin::Filter::URI;
 use strict;
 use warnings;
 use base qw(App::Hachero::Plugin::Base);
-
+use URI::QueryParam;
 
 sub filter :Hook {
     my ($self, $context) = @_;
@@ -74,8 +74,6 @@ excludes requests in specified time.
 =back
 
 =head1 AUTHOR
-
-Takaaki Mizuno <cpan@takaaki.info>
 
 Nobuo Danjou <nobuo.danjou@gmail.com>
 
