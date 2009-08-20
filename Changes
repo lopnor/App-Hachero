@@ -1,5 +1,9 @@
 Revision history for Perl extension App::Hachero
 
+0.09    2009-08-21T06:16:36+0900
+
+    - fix pod
+
 0.08    2009-08-20T22:53:53+0900
 
     - new Summarize hook
