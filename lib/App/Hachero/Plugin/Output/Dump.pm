@@ -19,7 +19,7 @@ __END__
 
 App::Hachero::Plugin::Output::Dump - dumps result to STDOUT (for debug)
 
-=head1 SYNOPSYS
+=head1 SYNOPSIS
 
   ---
   plugins:

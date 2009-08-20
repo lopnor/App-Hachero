@@ -4,7 +4,7 @@ use warnings;
 use base qw(Class::Accessor::Fast Class::Data::Inheritable);
 use Digest::MD5 qw(md5_hex);
 use App::Hachero::Result::Data;
-__PACKAGE__->mk_classdata('primary');
+__PACKAGE__->mk_classdata(qw(primary));
 __PACKAGE__->mk_accessors(qw(data arrayref));
 
 sub new {

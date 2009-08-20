@@ -78,6 +78,7 @@ sub run {
         $self->run_hook_and_check('analyze') or next;
         $self->run_hook('output_line');
     }
+    $self->run_hook('summarize');
     $self->run_hook('output');
     $self->run_hook('cleanup');
     $self->log(debug => sprintf ('run end: %s', scalar localtime));

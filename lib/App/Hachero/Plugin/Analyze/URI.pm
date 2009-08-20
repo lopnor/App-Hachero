@@ -9,11 +9,12 @@ sub initialize :Hook {
     my $config = $self->config->{config};
     $self->{result_key} = $config->{result_key} || 'URI';
     my @primary = keys %{$config->{result}};
-    App::Hachero::Plugin::Analyze::URI::Result->mk_classdata(
-        primary => @primary ? [ @primary ] : ['URI']
+    my $r = App::Hachero::Plugin::Analyze::URI::Result->new(
+        {
+            primary => @primary ? [ @primary ] : ['URI']
+        }
     );
-    $context->result->{$self->{result_key}} 
-        = App::Hachero::Plugin::Analyze::URI::Result->new;
+    $context->result->{$self->{result_key}} = $r;
 }
 
 sub analyze :Hook {
@@ -39,7 +40,7 @@ sub analyze :Hook {
 
 package # hide from PAUSE
     App::Hachero::Plugin::Analyze::URI::Result;
-use base qw(App::Hachero::Result);
+use base qw(App::Hachero::Result::PrimaryPerInstance);
 
 1;
 __END__

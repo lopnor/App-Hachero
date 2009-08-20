@@ -1,0 +1,73 @@
+use strict;
+use warnings;
+use Test::Base;
+use App::Hachero;
+use App::Hachero::Result::PrimaryPerInstance;
+
+plan tests => 1 * blocks;
+
+filters {
+    config => [qw(yaml)],
+    result => [qw(yaml create_result)],
+    expected => [qw(yaml)],
+};
+
+sub create_result {
+    my ($hash) = @_;
+    my $res = {};
+    while (my ($key, $value) = each %{$hash}) {
+        my $r = App::Hachero::Result::PrimaryPerInstance->new;
+        for (@{$value}) {
+            $r->primary([ keys %{$_} ]) unless $r->primary;
+            $r->push($_); 
+        }
+        $res->{$key} = $r;
+    }
+    $_ = $res;
+}
+
+my $app = App::Hachero->new(
+    { config => { plugins => [ { module => 'Summarize::Ranking' } ] } }
+);
+
+run {
+    my $block = shift;
+    $app->config->{plugins}->[0]->{config} = $block->config;
+    $app->run_hook('initialize');
+    $app->result($block->result);
+    $app->run_hook('summarize');
+    is_deeply $app->result->{$config->{to_result_key}}, $block->expected;
+};
+
+__END__
+===
+--- config
+from_result_key: URI
+to_result_key: ranking
+order_by: 
+    - count: desc
+limit: 3
+
+--- result
+URI:
+    - path: '/some/path/1'
+    - path: '/some/path/1'
+    - path: '/some/path/2'
+    - path: '/some/path/2'
+    - path: '/some/path/2'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/another/path/2'
+    - path: '/another/path/1'
+    - path: '/another/path/3'
+
+--- expected
+- path: '/some/path/3'
+  count: 4
+- path: '/some/path/2'
+  count: 3 
+- path: '/some/path/1'
+  count: 2 
+
