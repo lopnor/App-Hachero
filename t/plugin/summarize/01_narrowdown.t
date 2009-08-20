@@ -27,16 +27,16 @@ sub create_result {
 }
 
 my $app = App::Hachero->new(
-    { config => { plugins => [ { module => 'Summarize::Ranking' } ] } }
+    { config => { plugins => [ { module => 'Summarize::NarrowDown' } ] } }
 );
 
 run {
     my $block = shift;
-    $app->config->{plugins}->[0]->{config} = $block->config;
+    $app->conf->{plugins}->[0]->{config} = $block->config;
     $app->run_hook('initialize');
     $app->result($block->result);
     $app->run_hook('summarize');
-    is_deeply $app->result->{$config->{to_result_key}}, $block->expected;
+    is_deeply [ $app->result->{$block->config->{to_result_key}}->values ], $block->expected;
 };
 
 __END__
@@ -44,8 +44,8 @@ __END__
 --- config
 from_result_key: URI
 to_result_key: ranking
-order_by: 
-    - count: desc
+primary:
+    - path
 limit: 3
 
 --- result
@@ -59,13 +59,21 @@ URI:
     - path: '/some/path/3'
     - path: '/some/path/3'
     - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
     - path: '/another/path/2'
     - path: '/another/path/1'
     - path: '/another/path/3'
 
 --- expected
 - path: '/some/path/3'
-  count: 4
+  count: 12 
 - path: '/some/path/2'
   count: 3 
 - path: '/some/path/1'

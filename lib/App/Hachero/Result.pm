@@ -5,6 +5,8 @@ use base qw(Class::Accessor::Fast Class::Data::Inheritable);
 use Digest::MD5 qw(md5_hex);
 use App::Hachero::Result::Data;
 __PACKAGE__->mk_classdata(qw(primary));
+__PACKAGE__->mk_classdata(sort_key => undef);
+__PACKAGE__->mk_classdata(sort_reverse => 0);
 __PACKAGE__->mk_accessors(qw(data arrayref));
 
 sub new {
@@ -31,18 +33,47 @@ sub values {
     return @{$self->arrayref};
 }
 
+sub sorted_values {
+    my ($self,$args) = @_;
+    $self->_sort($args);
+    return @{$self->arrayref};
+}
+
 sub sort {
     my $self = shift;
+    $self->_sort(
+        {
+            keys => $self->sort_key || $self->primary, 
+            reverse => $self->sort_reverse || 0,
+        }
+    );
+}
+
+sub _sort {
+    my ($self,$args) = @_;
+    my $keys = $args->{keys};
+    $keys = [$keys] unless ref $keys;
     $self->arrayref([]);
     my $cmp = sub {
-        for (@{$self->primary}) {
+        for (@{$keys}) {
+            if ($_ eq 'count') {
+                if (my $res = $a->{$_} <=> $b->{$_}) {
+                    return $res;
+                }
+            }
             if (my $res = $a->{$_} cmp $b->{$_}) {
                 return $res;
             }
         }
     };
-    for my $value (sort $cmp CORE::values %{$self->data}) {
-        CORE::push @{$self->arrayref}, $value;
+    if ($args->{reverse}) {
+        for my $value (reverse sort $cmp CORE::values %{$self->data}) {
+            CORE::push @{$self->arrayref}, $value;
+        }
+    } else {
+        for my $value (sort $cmp CORE::values %{$self->data}) {
+            CORE::push @{$self->arrayref}, $value;
+        }
     }
 }
 
