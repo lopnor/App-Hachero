@@ -46,13 +46,13 @@ __END__
 
 =head1 NAME
 
-App::Hachero::Plugin::Summarize::Ranking - cuts up and sorts results 
+App::Hachero::Plugin::Summarize::NarrowDown - cuts up and sorts results 
 
 =head1 SYNOPSIS
 
   ---
   plugins:
-    - module: Summarize::Ranking
+    - module: Summarize::NarrowDown
       config:
         from_result_key: URI
         to_result_key: ranking
