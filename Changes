@@ -1,5 +1,13 @@
 Revision history for Perl extension App::Hachero
 
+0.08    2009-08-20T22:53:53+0900
+
+    - new Summarize hook
+    - new Filter::URI plugin
+    - new Summarize::NarrowDown plugin
+    - new Summarize::Scraper plugin
+    - more options for Parse::Common plugin
+
 0.07    2009-08-14T16:46:00+0900
 
     - faster Input::File plugin debug message
