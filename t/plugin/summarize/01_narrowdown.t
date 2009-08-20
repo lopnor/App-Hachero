@@ -51,6 +51,63 @@ limit: 3
 --- result
 URI:
     - path: '/some/path/1'
+      query: foo
+    - path: '/some/path/1'
+      query: foo+bar
+    - path: '/some/path/2'
+      query: foo+bar+baz
+    - path: '/some/path/2'
+      query: foo+bar+baz
+    - path: '/some/path/2'
+      query: foo+bar
+    - path: '/some/path/3'
+      query: foo
+    - path: '/some/path/3'
+      query: foo+bar
+    - path: '/some/path/3'
+      query: foo
+    - path: '/some/path/3'
+      query: foo
+    - path: '/some/path/3'
+      query: foo
+    - path: '/some/path/3'
+      query: foo+bar
+    - path: '/some/path/3'
+      query: foo+bar+baz
+    - path: '/some/path/3'
+      query: foo+bar+baz
+    - path: '/some/path/3'
+      query: foo+bar+baz
+    - path: '/some/path/3'
+      query: foo+bar
+    - path: '/some/path/3'
+      query: foo
+    - path: '/some/path/3'
+      query: foo+bar
+    - path: '/another/path/2'
+      query: foo+bar
+    - path: '/another/path/1'
+      query: foo+bar+baz
+    - path: '/another/path/3'
+      query: foo
+
+--- expected
+- path: '/some/path/3'
+  count: 12 
+- path: '/some/path/2'
+  count: 3 
+- path: '/some/path/1'
+  count: 2 
+
+===
+--- config
+from_result_key: URI
+to_result_key: ranking
+limit: 3
+
+--- result
+URI:
+    - path: '/some/path/1'
     - path: '/some/path/1'
     - path: '/some/path/2'
     - path: '/some/path/2'
@@ -79,3 +136,115 @@ URI:
 - path: '/some/path/1'
   count: 2 
 
+===
+--- config
+from_result_key: URI
+to_result_key: ranking
+mincount: 3
+
+--- result
+URI:
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/1'
+    - path: '/some/path/1'
+    - path: '/some/path/2'
+    - path: '/some/path/3'
+    - path: '/some/path/2'
+    - path: '/some/path/2'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/some/path/3'
+    - path: '/another/path/2'
+    - path: '/another/path/1'
+    - path: '/another/path/3'
+
+--- expected
+- path: '/some/path/3'
+  count: 12 
+- path: '/some/path/2'
+  count: 3 
+
+=== 
+--- config
+from_result_key: URI
+to_result_key: ranking
+
+--- result
+URI:
+    - path: '/some/path/1'
+      query: foo
+    - path: '/some/path/1'
+      query: foo+bar
+    - path: '/some/path/2'
+      query: foo+bar+baz
+    - path: '/some/path/2'
+      query: foo+bar+baz
+    - path: '/some/path/2'
+      query: foo+bar
+    - path: '/some/path/3'
+      query: foo
+    - path: '/some/path/3'
+      query: foo+bar
+    - path: '/some/path/3'
+      query: foo
+    - path: '/some/path/3'
+      query: foo
+    - path: '/some/path/3'
+      query: foo
+    - path: '/some/path/3'
+      query: foo+bar
+    - path: '/some/path/3'
+      query: foo+bar+baz
+    - path: '/some/path/3'
+      query: foo+bar+baz
+    - path: '/some/path/3'
+      query: foo+bar+baz
+    - path: '/some/path/3'
+      query: foo+bar
+    - path: '/some/path/3'
+      query: foo
+    - path: '/another/path/2'
+      query: foo+bar
+    - path: '/another/path/1'
+      query: foo+bar+baz
+    - path: '/another/path/3'
+      query: foo
+
+--- expected
+- path: '/some/path/3'
+  query: foo
+  count: 5
+- path: '/some/path/3'
+  query: foo+bar+baz
+  count: 3
+- path: '/some/path/3'
+  query: foo+bar
+  count: 3 
+- path: '/some/path/2'
+  query: foo+bar+baz
+  count: 2
+- path: '/another/path/1'
+  query: foo+bar+baz
+  count: 1
+- path: '/some/path/2'
+  query: foo+bar
+  count: 1
+- path: '/some/path/1'
+  query: foo+bar
+  count: 1
+- path: '/another/path/2'
+  query: foo+bar
+  count: 1
+- path: '/some/path/1'
+  query: foo
+  count: 1
+- path: '/another/path/3'
+  query: foo
+  count: 1

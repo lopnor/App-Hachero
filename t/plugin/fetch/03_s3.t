@@ -18,7 +18,7 @@ BEGIN {
                 AWS_ACCESS_KEY_ID 
                 AWS_SECRET_ACCESS_KEY 
             )) {
-            $ENV{$_} or plan skip_all => "set $_ to run this test";
+            $ENV{$_} or plan skip_all => "set \"$_\" to run this test";
             exit 0;
         }   
         plan tests => 2;

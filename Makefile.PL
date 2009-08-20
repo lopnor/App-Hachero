@@ -60,7 +60,12 @@ feature 'Plugin::Output::DBIC',
     -default => 0,
     'DBIx::Class::Schema::Loader';
 
-build_requires 'Test::More';
+feature 'Plugin::Summarize::Scraper',
+    -default => 0,
+    'Web::Scraper';
+
+build_requires 'Test::More' => '0.88';
+build_requires 'Test::MockModule';
 
 install_script 'hachero.pl';
 
@@ -71,5 +76,6 @@ auto_install(
 );
 use_test_base;
 auto_include;
+auto_set_repository;
 WriteAll;
 

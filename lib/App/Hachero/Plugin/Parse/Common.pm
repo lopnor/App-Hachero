@@ -6,8 +6,13 @@ use Regexp::Log::Common;
 
 sub initialize : Hook {
     my ($self, $context) = @_;
+    my $config = $self->config->{config};
+    for (keys %{$config->{REGEXP}}) {
+        $Regexp::Log::Common::REGEXP{$_} = $config->{REGEXP}->{$_};
+    }
     my $regexp = Regexp::Log::Common->new(
-        format => $self->config->{config}->{format} || ':extended',
+        format => $config->{format} || ':extended',
+        ($config->{capture} ? (capture => $config->{capture}) : ()),
     );
     $self->{re} = $regexp->regexp;
     @{$self->{capture}} = $regexp->capture;

@@ -28,13 +28,11 @@ sub push {
 }
 
 sub values {
-    my $self = shift;
-    $self->sort;
-    return @{$self->arrayref};
-}
-
-sub sorted_values {
     my ($self,$args) = @_;
+    $args ||= {
+        keys => $self->sort_key || $self->primary, 
+        reverse => $self->sort_reverse || 0,
+    };
     $self->_sort($args);
     return @{$self->arrayref};
 }

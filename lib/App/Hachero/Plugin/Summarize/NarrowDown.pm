@@ -6,30 +6,35 @@ use base qw(App::Hachero::Plugin::Base);
 sub summarize :Hook {
     my ($self, $context) = @_;
     my $config = $self->config->{config};
-    my $tmp = App::Hachero::Result::PrimaryPerInstance->new(
-        { 
-            primary => $config->{primary},
-            sort_key => 'count',
-            sort_reverse => 1,
-        }
-    );
-    for my $r ( $context->result->{$config->{from_result_key}}->values ) {
-        $tmp->push(
-            { map { $_ => $r->{$_} } ('count', @{$config->{primary}}) }
+    my $tmp;
+    if ($config->{primary}) {
+        $tmp = App::Hachero::Result::PrimaryPerInstance->new(
+            { 
+                primary => $config->{primary},
+                sort_key => [ 'count', @{$config->{primary}} ],
+                sort_reverse => 1,
+            }
         );
+        for my $r ( $context->result->{$config->{from_result_key}}->values ) {
+            $tmp->push(
+                +{ map {$_ => $r->{$_}} ('count', @{$config->{primary}}) }
+            );
+        }
+    } else {
+        $tmp = $context->result->{$config->{from_result_key}};
     }
     my $count = 0;
     my $result = App::Hachero::Result::PrimaryPerInstance->new(
         { 
-            primary => $config->{primary},
-            sort_key => 'count',
+            primary => $tmp->{primary},
+            sort_key => [ 'count', @{$tmp->{primary}} ],
             sort_reverse => 1,
         }
     );
     $context->result->{$config->{to_result_key}} = $result;
-    for my $r ($tmp->values) {
+    for my $r ($tmp->values({keys => ['count', @{$tmp->primary}], reverse => 1})) {
         last if $config->{limit} && ($count++ == $config->{limit});
-        last if $config->{mincount} && ($r->count < $config->{mincount});
+        last if $config->{mincount} && ($r->{count} < $config->{mincount});
         $result->push($r);
     }
 }
