@@ -20,7 +20,7 @@ sub summarize :Hook {
         for my $meth (keys %{$config->{uri}}) {
             $uri->$meth($config->{uri}->{$meth});
         }
-        my $result = $scraper->scrape($uri) or next;
+        my $result = eval {$scraper->scrape($uri)} or next;
         $r->{$config->{result}->{result_to}} = $result;
     }
 }

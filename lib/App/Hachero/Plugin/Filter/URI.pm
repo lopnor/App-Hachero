@@ -10,10 +10,10 @@ sub filter :Hook {
     my $config = $self->config->{config};
     my $include = 0;
     for my $set (@$config) {
-        my ($type, $value) = each %$set;
+        my ($type, $value) = %$set;
         my $match = 1;
         if (ref $value eq 'HASH') {
-            my ($meth, $rule) = each %$value;
+            my ($meth, $rule) = %$value;
             my @r = $req->$meth;
             my $result = scalar @r == 1 ? $r[0] : {@r};
             if (ref $rule eq 'Regexp') {

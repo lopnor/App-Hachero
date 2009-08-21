@@ -6,13 +6,20 @@ use Template;
 
 sub output : Hook {
     my ($self, $context, $args) = @_;
-    my $tt_file = $self->config->{config}->{template};
-    my $out_file = $self->config->{config}->{out};
+    my $config = $self->config->{config};
+    my $tt_file = $config->{template};
+    my $out_file = $config->{out};
     my $tt = Template->new(
         ABSOLUTE => 1,
         ENCODING => 'utf8',
     ) or die $Template::ERROR;
-    my $ok = $tt->process($tt_file, $context, $out_file, {binmode => ':utf8'});
+    my $vars;
+    if ($config->{stash_key} && $config->{result_key}) {
+        $vars = {$config->{stash_key} => $context->result->{$config->{result_key}}};
+    } else {
+        $vars = $context;
+    }
+    my $ok = $tt->process($tt_file, $vars, $out_file, {binmode => ':utf8'});
     $ok or die $tt->error;
 }
 
