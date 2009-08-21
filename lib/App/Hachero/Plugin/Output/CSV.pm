@@ -11,7 +11,7 @@ sub output : Hook {
     for my $output (@{$self->config->{config}->{output}}) {
         my ($key, $fields);
         if (ref $output eq 'HASH') {
-            ($key, $fields) = each %$output;
+            ($key, $fields) = %$output;
         } else {
             $key = $output;
         }

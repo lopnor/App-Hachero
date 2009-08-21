@@ -26,7 +26,7 @@ sub analyze :Hook {
         for my $key (keys %$hash) {
             my $meth = $hash->{$key};
             if (ref $meth eq 'HASH') {
-                my ($meth, $param) = each %$meth;
+                my ($meth, $param) = %$meth;
                 $result->{$key} = $req->$meth($param);
             } else {
                 $result->{$key} = $req->$meth;
