@@ -1,5 +1,11 @@
 Revision history for Perl extension App::Hachero
 
+0.10    2009-09-04T21:33:19+0900
+
+    - support for 'stash_key' with Output::TT plugin
+    - safer scraping with Summarize::Scraper plugin
+    - fix bugs with unnecessary 'each'
+
 0.09    2009-08-21T06:16:36+0900
 
     - fix pod
