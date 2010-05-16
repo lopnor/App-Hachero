@@ -5,6 +5,12 @@ use Test::More tests => 2;
 use App::Hachero;
 use File::Temp;
 use File::Spec::Functions;
+BEGIN {
+    eval {require File::Find::Rule; require IO::Uncompress::Gunzip;};
+    if ($@) {
+        plan skip_all => 'File::Find::Rule or IO::Uncompress::Gunzip not found';
+    }
+}
 
 my $work_path = File::Temp::tempdir(CLEANUP => 1, DIR => 't');
 my $gzfile = catfile(qw( t data test.gzip ));

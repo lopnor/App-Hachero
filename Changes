@@ -1,5 +1,9 @@
 Revision history for Perl extension App::Hachero
 
+0.11    2010-05-15T09:01:00+0900
+
+    - Fix dependency for Fetch::Gunzip
+
 0.10    2009-09-04T21:33:19+0900
 
     - support for 'stash_key' with Output::TT plugin

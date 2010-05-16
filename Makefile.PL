@@ -46,7 +46,8 @@ feature 'Plugin::Fetch::S3',
 
 feature 'Plugin::Fetch::Gunzip',
     -default => 0,
-    'IO::Uncompress::Gunzip';
+    'IO::Uncompress::Gunzip',
+    'File::Find::Rule';
 
 feature 'Plugin::Classify::UserAgent',
     -default => 0,
