@@ -1,7 +1,7 @@
 #!perl
 use strict;
 use warnings;
-use Test::More tests => 2;
+use Test::More;
 use App::Hachero;
 use File::Temp;
 use File::Spec::Functions;
@@ -9,6 +9,8 @@ BEGIN {
     eval {require File::Find::Rule; require IO::Uncompress::Gunzip;};
     if ($@) {
         plan skip_all => 'File::Find::Rule or IO::Uncompress::Gunzip not found';
+    } else {
+        plan tests => 2;
     }
 }
 

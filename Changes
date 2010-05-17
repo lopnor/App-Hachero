@@ -1,5 +1,9 @@
 Revision history for Perl extension App::Hachero
 
+0.12    2010-05-17T11:59:00+0900
+
+    - Fix broken tests for Fetch::Gunzip
+
 0.11    2010-05-15T09:01:00+0900
 
     - Fix dependency for Fetch::Gunzip
