@@ -2,7 +2,7 @@ package App::Hachero;
 use strict;
 use warnings;
 use 5.008001;
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 use Class::Component;
 use base qw(Class::Accessor::Fast);
 use UNIVERSAL::require;

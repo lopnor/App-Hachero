@@ -1,5 +1,9 @@
 Revision history for Perl extension App::Hachero
 
+0.13    2010-08-15T16:50:00+0900
+
+    - fix broken tests for win32
+
 0.12    2010-05-17T11:59:00+0900
 
     - Fix broken tests for Fetch::Gunzip
