@@ -60,6 +60,7 @@ run {
     $app->run_hook('output');
     open my $fh_out, '<', $out;
     my $output = do {local $/; <$fh_out>};
+    $output =~ s{\r}{}g;
     close $fh_out;
     is $output, $block->expected;
     unlink $template;

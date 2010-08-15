@@ -2,7 +2,9 @@
 use strict;
 use warnings;
 use Test::More;
+use File::Basename;
 use App::Hachero;
+use File::Copy;
 use File::Temp;
 use File::Spec::Functions;
 BEGIN {
@@ -16,7 +18,7 @@ BEGIN {
 
 my $work_path = File::Temp::tempdir(CLEANUP => 1, DIR => 't');
 my $gzfile = catfile(qw( t data test.gzip ));
-system('cp', $gzfile, catfile($work_path, 'test.gz'));
+copy($gzfile, catfile($work_path, 'test.gz'));
 
 my $config = {
     plugins => [
@@ -33,5 +35,4 @@ my $app = App::Hachero->new({config => $config});
 $app->initialize;
 ok $app->run_hook('fetch');
 
-is_deeply [map {s/^$work_path\///;$_} glob("$work_path/*")], ['test'];
-
+is_deeply [ map {basename($_)} glob("$work_path/*") ], ['test'];
